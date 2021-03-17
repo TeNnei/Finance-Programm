@@ -25,9 +25,6 @@ public class ProgramIn {
     @FXML
     void initialize (){
         contin.setOnAction(actionEvent -> {
-            int codeIn = Integer.parseInt(debit.getText());
-            checkCodeIn(codeIn);
-
             try {
                 registOperation();
 
@@ -35,7 +32,8 @@ public class ProgramIn {
                 e.printStackTrace();
             }
 
-
+            int codeIn = Integer.parseInt(debit.getText());
+            checkCodeIn(codeIn);
             updateConsolidInf();
             updateConsolidInf1();
             updateConsoliddebit();
@@ -126,5 +124,9 @@ public class ProgramIn {
         db.consolidUpdatekredit(inf);
     }
 }
+
+            int codeIn = Integer.parseInt(debit.getText());
+            checkCodeIn(codeIn);
+
 
 
