@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="470.0" minWidth="641.0" prefHeight="470.0" prefWidth="641.0" style="-fx-background-color: #f0d26e;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Registration">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="432.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="419.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="399.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints maxHeight="300.0" minHeight="86.0" prefHeight="193.0" vgrow="ALWAYS" />
+        <RowConstraints maxHeight="687.0" minHeight="36.0" prefHeight="67.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="69.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="481.0" minHeight="10.0" prefHeight="143.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <TextField fx:id="Name" alignment="CENTER" cache="true" cacheHint="SPEED" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="386.0" promptText="Имя" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </TextField>
+        <TextField fx:id="Passport" alignment="CENTER" cache="true" cacheHint="SPEED" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="386.0" promptText="Паспорт" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </TextField>
+      <TextField fx:id="SecondName" alignment="CENTER" cache="true" cacheHint="SPEED" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="54.0" prefWidth="386.0" promptText="Фамилия" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </TextField>
+        <Text fontSmoothingType="LCD" stroke="BLACK" strokeWidth="0.0" text="Регистрация" textAlignment="CENTER" textOrigin="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+            <font>
+                <Font size="55.0" />
+            </font>
+        </Text>
+      <TextField fx:id="login" alignment="CENTER" cache="true" cacheHint="SPEED" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="77.0" prefWidth="187.0" promptText="Логин" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </TextField>
+      <PasswordField fx:id="password" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="77.0" prefWidth="187.0" promptText="Пароль" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </PasswordField>
+      <Button fx:id="Regist" alignment="CENTER" mnemonicParsing="false" prefHeight="47.0" prefWidth="168.0" text="Регистрация" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="Back" mnemonicParsing="false" text="Назад" GridPane.valignment="TOP" />
+    </children>
+</GridPane>

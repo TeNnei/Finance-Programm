@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="PostGRE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/artifacts/PostGRE_jar/PostGRE.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
