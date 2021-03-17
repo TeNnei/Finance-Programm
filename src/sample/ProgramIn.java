@@ -34,12 +34,15 @@ public class ProgramIn {
                 e.printStackTrace();
             }
 
-
             updateConsolidInf();
             updateConsolidInf1();
             updateConsoliddebit();
             updateConsolidkredit();
             updateConsolidOut();
+            updateConsolidOut1();
+            updateConsolidDifference();
+            updateConsolidDifference1();
+
         });
 
     }
@@ -115,6 +118,21 @@ public class ProgramIn {
         int debit2 = Integer.parseInt(debit.getText());
         ConsolidInfin inf = new ConsolidInfin(debit2);
         db.consolidUpdateOut(inf);
+    }
+    public void updateConsolidOut1(){
+        int debit2 = Integer.parseInt(kredit.getText());
+        ConsolidInfin inf = new ConsolidInfin(debit2);
+        db.consolidUpdateOut(inf);
+    }
+    public void updateConsolidDifference(){
+        int debit3 = Integer.parseInt(debit.getText());
+        ConsolidInfin inf = new ConsolidInfin(debit3);
+        db.consolidUpdateDifference(inf);
+    }
+    public void updateConsolidDifference1(){
+        int debit3 = Integer.parseInt(kredit.getText());
+        ConsolidInfin inf = new ConsolidInfin(debit3);
+        db.consolidUpdateDifference(inf);
     }
 }
 

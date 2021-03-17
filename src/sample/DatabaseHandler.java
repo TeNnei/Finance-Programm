@@ -278,4 +278,17 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
+    public void consolidUpdateDifference (ConsolidInfin auth2){
+        String updateOut = "UPDATE summary SET difference = (SELECT saldo_out_som FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_som FROM summary WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setInt(1, auth2.getDebit());
+            prepare.setInt(2, auth2.getDebit());
+            prepare.setInt (3, auth2.getDebit());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
