@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d8dee0ae-b26d-4da1-a9b4-9075980db19a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ProgramIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ProgramIn.java" afterDir="false" />
-    </list>
-    <list id="d413487d-4172-44eb-adbf-395fe47e7175" name="" comment="">
-      <change beforePath="$PROJECT_DIR$/src/sample/ProgramIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ProgramIn.java" afterDir="false" />
-    </list>
+    <list default="true" id="d8dee0ae-b26d-4da1-a9b4-9075980db19a" name="Default Changelist" comment="" />
+    <list id="d413487d-4172-44eb-adbf-395fe47e7175" name="" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,15 +10,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/src/sample/ProgramIn.java">
-      <ranges>
-        <range start1="27" end1="30" start2="27" end2="27" changelist="d8dee0ae-b26d-4da1-a9b4-9075980db19a" />
-        <range start1="37" end1="38" start2="34" end2="36" changelist="d8dee0ae-b26d-4da1-a9b4-9075980db19a" />
-        <range start1="129" end1="129" start2="127" end2="131" changelist="d413487d-4172-44eb-adbf-395fe47e7175" />
-      </ranges>
-    </file>
   </component>
   <component name="ProjectId" id="1ps4yHITrxmboiGEsLI043xYeTq" />
   <component name="ProjectViewState">
@@ -79,6 +65,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="LAST_COMMIT_MESSAGE" value="" />
