@@ -166,7 +166,7 @@ public class DatabaseHandler {
 //
 
         public Boolean checkCode(ConsolidInfin auth) {
-        ResultSet resultSet = null;
+        ResultSet resultSet;
         String select = "SELECT * FROM " + ConsolidInf.TABLE_OF_SUMMARY + " WHERE "
                 + ConsolidInf.CODE + "=?";
         try {
