@@ -9,7 +9,6 @@ public class DatabaseHandler {
     static final String PASS = "987346521";
 
     public static Connection getDbConnection() {
-
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
