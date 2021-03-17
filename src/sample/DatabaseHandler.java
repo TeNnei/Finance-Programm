@@ -1,6 +1,5 @@
 package sample;
 
-import java.util.Date;
 import java.sql.*;
 
 public class DatabaseHandler {
