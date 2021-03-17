@@ -37,5 +37,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button fx:id="update" mnemonicParsing="false" text="Update" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
     </children>
 </GridPane>

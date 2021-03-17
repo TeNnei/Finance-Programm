@@ -165,7 +165,7 @@ public class DatabaseHandler {
 //    }
 //
 
-        public ResultSet checkCode(ConsolidInfin auth) {
+        public Boolean checkCode(ConsolidInfin auth) {
         ResultSet resultSet = null;
         String select = "SELECT * FROM " + ConsolidInf.TABLE_OF_SUMMARY + " WHERE "
                 + ConsolidInf.CODE + "=?";
@@ -173,10 +173,13 @@ public class DatabaseHandler {
             PreparedStatement prst0 = getDbConnection().prepareStatement(select);
             prst0.setInt( 1, auth.getCode());
             resultSet = prst0.executeQuery();
+            Boolean checkResult = resultSet.next();
+            resultSet.close();
+            return checkResult;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return resultSet;
+        return false;
     }
 
     public void writeInProgram(ProgramData org){
@@ -271,8 +274,8 @@ public class DatabaseHandler {
             prepare.setInt(4, auth2.getDebit());
             prepare.executeUpdate();
         }
-    catch (SQLException throwables) {
-        throwables.printStackTrace();
-    }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

@@ -48,6 +48,7 @@ public class Consolidated {
             }
             ConsolidatedTable.setItems(data);
             ConsolidatedTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+            rs.close();
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error on Building Data");

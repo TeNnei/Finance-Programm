@@ -22,8 +22,13 @@ public class ProgrammController {
     @FXML private Button Continue;
     private ObservableList<ObservableList> data;
     @FXML private Button consolidated;
+    @FXML private Button update;
 
     @FXML void initialize(){
+        update.setOnAction(actionEvent -> {
+            updateData();
+        });
+
         buildData();
 
 
