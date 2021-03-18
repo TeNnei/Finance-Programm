@@ -11,7 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -23,8 +28,42 @@ public class ProgrammController {
     private ObservableList<ObservableList> data;
     @FXML private Button consolidated;
     @FXML private Button update;
+    @FXML private Button excel;
 
     @FXML void initialize(){
+
+        excel.setOnAction(actionEvent -> {
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            HSSFSheet spreadsheet = workbook.createSheet("Main_Information");
+
+            HSSFRow row;
+
+            for (int i = 0; i < tableView.getItems().size(); i++) {
+                spreadsheet.setDefaultColumnWidth(30);
+                row = spreadsheet.createRow(i);
+                ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i);
+                for (int j = 0; j < currentRow.size(); j++) {
+                    row.createCell(j).setCellValue(currentRow.get(j));
+                }
+            }
+            FileOutputStream fileOut = null;
+            try {
+                fileOut = new FileOutputStream("Operation.xls");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                workbook.write(fileOut);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                fileOut.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         update.setOnAction(actionEvent -> {
             updateData();
         });

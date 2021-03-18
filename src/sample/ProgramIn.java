@@ -1,5 +1,6 @@
 package sample;
 
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -7,7 +8,6 @@ import javafx.scene.control.TextField;
 
 import java.text.ParseException;
 import java.sql.Date;
-
 
 public class ProgramIn {
     @FXML private TextField contract_number;
@@ -19,10 +19,13 @@ public class ProgramIn {
     @FXML private TextField contract;
     @FXML private DatePicker date;
     @FXML private TextField usd;
+
     private static DatabaseHandler db = new DatabaseHandler();
 
     @FXML
     void initialize (){
+
+
         contin.setOnAction(actionEvent -> {
             int codeIn = Integer.parseInt(debit.getText());
             checkCodeIn(codeIn);
@@ -58,7 +61,7 @@ public class ProgramIn {
         String contract_number1 = contract_number.getText();
         String contract1 = contract.getText();
         int som1;
-        if (som.equals("")){
+        if (som.getText().equals("")){
             som1 = 0;
         }else
             {
@@ -69,7 +72,7 @@ public class ProgramIn {
         Date date1 = Date.valueOf(date.getValue());
         String comment = comments.getText();
         int usd1;
-        if (usd.equals("")) {
+        if (usd.getText().equals("")) {
             usd1 = 0;
         }else
             {
