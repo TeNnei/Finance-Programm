@@ -263,7 +263,7 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateOutUsd (ConsolidInfin auth2){
-        String updateOut = "UPDATE summary SET saldo_out_usd = (SELECT saldo_in_usd FROM summary WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debet_usd FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT kredit_usd FROM summary WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET saldo_out_usd = (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT credit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -277,7 +277,7 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateDifferenceUsd (ConsolidInfin auth2){
-        String updateOut = "UPDATE summary SET difference_usd = (SELECT saldo_out_usd FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_usd FROM summary WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET difference_usd = (SELECT saldo_out_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -327,7 +327,7 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateOut (ConsolidInfin auth2){
-        String updateOut = "UPDATE summary SET saldo_out_som = (SELECT saldo_in_som FROM summary WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debet FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT kredit FROM summary WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET saldo_out_som = (SELECT saldo_in_som FROM consolid WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debet FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT kredit FROM consolid WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -341,7 +341,7 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateDifference (ConsolidInfin auth2){
-        String updateOut = "UPDATE summary SET difference = (SELECT saldo_out_som FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_som FROM summary WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET defference = (SELECT saldo_out_som FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_som FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
