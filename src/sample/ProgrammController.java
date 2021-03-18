@@ -35,8 +35,8 @@ public class ProgrammController {
         excel.setOnAction(actionEvent -> {
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet spreadsheet = workbook.createSheet("Main_Information");
-
             HSSFRow row;
+
 
             for (int i = 0; i < tableView.getItems().size(); i++) {
                 spreadsheet.setDefaultColumnWidth(30);
@@ -48,7 +48,7 @@ public class ProgrammController {
             }
             FileOutputStream fileOut = null;
             try {
-                fileOut = new FileOutputStream("Operation.xls");
+                fileOut = new FileOutputStream("Main_Information.xls");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -63,6 +63,7 @@ public class ProgrammController {
                 e.printStackTrace();
             }
         });
+
 
         update.setOnAction(actionEvent -> {
             updateData();
