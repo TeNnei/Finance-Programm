@@ -239,7 +239,7 @@ public class DatabaseHandler {
         }
     }
     public void  consolidUpdatedebitUsd (ConsolidInfin auth1) {
-        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.DEBET + " = (SELECT SUM (usd) FROM maininf WHERE "
+        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.DEBET_USD + " = (SELECT SUM (usd) FROM maininf WHERE "
                 + MainInf.DEBIT + " =?)" + " WHERE " + ConsolidInf.CODE +" =?";
         try {
             PreparedStatement prepere = getDbConnection().prepareStatement(update);
@@ -251,7 +251,7 @@ public class DatabaseHandler {
         }
     }
     public void  consolidUpdatekreditUsd (ConsolidInfin auth1) {
-        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.KREDIT + " = (SELECT SUM (usd) FROM maininf WHERE "
+        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.KREDIT_USD + " = (SELECT SUM (usd) FROM maininf WHERE "
                 + MainInf.KREDIT + " =?)" + " WHERE " + ConsolidInf.CODE +" =?";
         try {
             PreparedStatement prepere = getDbConnection().prepareStatement(update);
