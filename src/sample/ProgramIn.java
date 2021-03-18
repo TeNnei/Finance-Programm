@@ -57,16 +57,22 @@ public class ProgramIn {
     public void registOperation () throws ParseException {
         String contract_number1 = contract_number.getText();
         String contract1 = contract.getText();
-        int som1 = 0;
-        int usd1 = 0;
-        if (!som.equals("")){
-            som1 = Integer.parseInt(som.getText());
+        int som1;
+        if (som.equals("")){
+            som1 = 0;
+        }else
+            {
+                som1 = Integer.parseInt(som.getText());
         }
         int debit1 = Integer.parseInt(debit.getText());
         int credit1 = Integer.parseInt(kredit.getText());
         Date date1 = Date.valueOf(date.getValue());
         String comment = comments.getText();
-        if (!usd.equals("")){
+        int usd1;
+        if (usd.equals("")) {
+            usd1 = 0;
+        }else
+            {
             usd1 = Integer.parseInt(usd.getText());
         }
         ProgramData inf = new ProgramData(contract_number1, contract1, debit1, credit1, date1, comment, som1, usd1);
