@@ -19,11 +19,11 @@
         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="73.0" prefHeight="641.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TableView fx:id="tableView" cache="true" cacheHint="SPEED" depthTest="ENABLE" editable="true" prefHeight="200.0" prefWidth="200.0" style="-fx-font-size: 18;" tableMenuButtonVisible="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <TableView fx:id="tableView" cache="true" cacheHint="SPEED" depthTest="ENABLE" editable="true" pickOnBounds="false" prefHeight="200.0" prefWidth="200.0" style="-fx-font-size: 18;" tableMenuButtonVisible="true" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
             <columnResizePolicy>
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy></TableView>
-        <Text fontSmoothingType="LCD" stroke="BLACK" strokeWidth="0.0" text="Главная информация" textAlignment="CENTER" textOrigin="CENTER" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+        <Text fontSmoothingType="LCD" stroke="BLACK" strokeWidth="0.0" text="Главная информация" textAlignment="CENTER" textOrigin="CENTER" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS" style="width: auto; height: auto;">
             <font>
                 <Font size="55.0" />
             </font>
@@ -33,7 +33,7 @@
                 <Font size="22.0" />
             </font>
         </Button>
-      <Button fx:id="consolidated" mnemonicParsing="false" text="Consolidated" GridPane.columnIndex="1">
+      <Button fx:id="consolidated" mnemonicParsing="false" text="Consolidated" GridPane.columnIndex="1" style="width: auto; height: auto;">
          <font>
             <Font size="20.0" />
          </font>

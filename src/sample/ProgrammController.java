@@ -11,24 +11,32 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.List;
 
 public class ProgrammController {
-
     @FXML private TableView<ObservableList> tableView;
     @FXML private Button Continue;
     private ObservableList<ObservableList> data;
     @FXML private Button consolidated;
     @FXML private Button update;
     @FXML private Button excel;
+    private static final String CONTRACT_NUMBER_COLUMN_HEADER = "№ Договора";
+    private static final String NUMBER_COLUMN_HEADER = "Договор";
+    private static final String DEBIT_COLUMN_HEADER = "Дебит";
+    private static final String CREDIT_COLUMN_HEADER = "Кредит";
+    private static final String DATA_COLUMN_HEADER = "Дата";
+    private static final String COMENTS_COLUMN_HEADER = "Расшифровка";
+    private static final String SOM_COLUMN_HEADER = "Сумм";
+    private static final String USD_COLUMN_HEADER = "Доллары";
 
     @FXML void initialize(){
 
@@ -36,16 +44,45 @@ public class ProgrammController {
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet spreadsheet = workbook.createSheet("Main_Information");
             HSSFRow row;
+            HSSFRow row1;
+            HSSFCell cell;
 
+            row1 = spreadsheet.createRow(0); // Вот здесь начинается прописываться шапка
+
+            cell = row1.createCell(0, CellType.STRING);
+            cell.setCellValue(CONTRACT_NUMBER_COLUMN_HEADER);
+
+            cell = row1.createCell(1,CellType.STRING);
+            cell.setCellValue(NUMBER_COLUMN_HEADER);
+
+            cell = row1.createCell(2, CellType.NUMERIC);
+            cell.setCellValue(DEBIT_COLUMN_HEADER);
+
+            cell = row1.createCell(3, CellType.NUMERIC);
+            cell.setCellValue(CREDIT_COLUMN_HEADER);
+
+            cell = row1.createCell(4);
+            cell.setCellValue(DATA_COLUMN_HEADER);
+
+            cell = row1.createCell(5);
+            cell.setCellValue(COMENTS_COLUMN_HEADER);
+
+            cell = row1.createCell(6, CellType.NUMERIC);
+            cell.setCellValue(SOM_COLUMN_HEADER);
+
+            cell = row1.createCell(7, CellType.NUMERIC);
+            cell.setCellValue(USD_COLUMN_HEADER); // вот здесь она заканчивается
 
             for (int i = 0; i < tableView.getItems().size(); i++) {
                 spreadsheet.setDefaultColumnWidth(30);
-                row = spreadsheet.createRow(i);
+                row = spreadsheet.createRow(i + 1); // Вот здесь я начинаю записывать данные в таблице Excel
                 ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i);
                 for (int j = 0; j < currentRow.size(); j++) {
                     row.createCell(j).setCellValue(currentRow.get(j));
                 }
             }
+            if (!(data == null))
+                spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + String.valueOf(0) + ":H" + String.valueOf(data.size())));
             FileOutputStream fileOut = null;
             try {
                 fileOut = new FileOutputStream("Main_Information.xls");
@@ -104,6 +141,7 @@ public class ProgrammController {
             stage.setMinHeight(720);
             stage.show();
         });
+
     }
     public void buildData() {
         Connection table;
@@ -159,4 +197,5 @@ public class ProgrammController {
             System.out.println("Error on Building Data");
         }
     }
+
 }
