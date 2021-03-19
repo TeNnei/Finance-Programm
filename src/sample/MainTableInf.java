@@ -1,0 +1,90 @@
+package sample;
+
+import java.sql.Date;
+
+public class MainTableInf {
+        private int som;
+        private int usd;
+        private int debit;
+        private int kredit;
+        private String contract;
+        private String contract_number;
+        private String comments;
+        private Date date;
+
+    public MainTableInf(String contract, String contract_number, int debit, int kredit, Date date, String comments, int som, int usd) {
+        this.som = som;
+        this.usd = usd;
+        this.debit = debit;
+        this.kredit = kredit;
+        this.contract = contract;
+        this.contract_number = contract_number;
+        this.comments = comments;
+        this.date = date;
+
+    }
+
+    public int getSom1() {
+        return som;
+    }
+
+    public void setSom1(int som) {
+        this.som = som;
+    }
+
+    public int getUsd() {
+        return usd;
+    }
+
+    public void setUsd(int usd) {
+        this.usd = usd;
+    }
+
+    public int getDebit() {
+        return debit;
+    }
+
+    public void setDebit(int debit) {
+        this.debit = debit;
+    }
+
+    public int getKredit() {
+        return kredit;
+    }
+
+    public void setKredit(int kredit) {
+        this.kredit = kredit;
+    }
+
+    public String getContract() {
+        return contract;
+    }
+
+    public void setContract(String contract) {
+        this.contract = contract;
+    }
+
+    public String getContract_number() {
+        return contract_number;
+    }
+
+    public void setContract_number(String contract_number) {
+        this.contract_number = contract_number;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+}
