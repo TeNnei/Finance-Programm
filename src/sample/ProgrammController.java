@@ -11,6 +11,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.FileNotFoundException;
@@ -18,14 +19,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class ProgrammController {
     @FXML private TableView tableView;
     @FXML private Button Continue;
-    private ObservableList data;
+    private ObservableList data; // незнаю правильно или нет но переменные столбцов и тд решил объявить глобально, что бы код был поменьше
     @FXML private Button consolidated;
     @FXML private Button update;
     @FXML private Button excel;
@@ -86,7 +86,7 @@ public class ProgrammController {
             for (int i = 0; i < tableView.getItems().size(); i++) {
                 spreadsheet.setDefaultColumnWidth(30);
                 row = spreadsheet.createRow(i + 1); // Вот здесь я начинаю записывать данные в таблице Excel
-                ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i);
+                ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i); // вот здесь он ругается на мой класс maintablinf
                 for (int j = 0; j < currentRow.size(); j++) {
                     row.createCell(j, CellType.NUMERIC).setCellValue(currentRow.get(j));
                 }
@@ -112,12 +112,8 @@ public class ProgrammController {
             }
         });
 
-
-        update.setOnAction(actionEvent -> updateData());
-
+        update.setOnAction(actionEvent -> buildData());
         buildData();
-
-
         consolidated.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/Consolidated.fxml"));
@@ -132,7 +128,7 @@ public class ProgrammController {
             stage.setMinWidth(1366);
             stage.setMinHeight(768);
             stage.show();
-            updateData();
+            buildData();
         });
 
         Continue.setOnAction(actionEvent -> {
@@ -162,7 +158,6 @@ public class ProgrammController {
            rs = table.createStatement().executeQuery(PostSQL);
 //           List<MainTableInf> tableinf = new ArrayList<>(); Array list не подходит никак
             while (rs.next()){
-
                 String first = rs.getString("contract_number");
                 String second = rs.getString("contract");
                 int third = rs.getInt("debit");
@@ -171,20 +166,17 @@ public class ProgrammController {
                 Date sixth = rs.getDate("date_of");
                 int seventh = rs.getInt("som");
                 int eght = rs.getInt("usd");
-
+                // MainTableInf считайте тотже самый класс что и ProgrammData просто я путаться начал и создал отдельный класс
                 MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, sixth, fifth, seventh, eght);
-
-                TableColumInf.getContract1();
+                TableColumInf.getContract();
                 TableColumInf.getComments();
-                TableColumInf.getDebit1();
-                TableColumInf.getContract_number1();
-                TableColumInf.getKredit1();
+                TableColumInf.getDebit();
+                TableColumInf.getContract_number();
+                TableColumInf.getKredit();
                 TableColumInf.getDate();
-                TableColumInf.getSom1();
+                TableColumInf.getSom();
                 TableColumInf.getUsd();
-
                 data.add(TableColumInf);
-
                 Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
                 Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
                 Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
@@ -193,47 +185,6 @@ public class ProgrammController {
                 Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
                 ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
                 Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
-
-                tableView.setItems(data);
-                tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-            }
-//            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-//                final int j = i;
-//                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-//                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-//                tableView.getColumns().addAll(col);
-//                System.out.println("Column [" + i + "] ");
-//            }
-//
-//            while (rs.next()) {
-//                ObservableList<String> row = FXCollections.observableArrayList();
-//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-//                    row.add(rs.getString(i));
-//                }
-//                System.out.println("Row [1] added " + row);
-//                data.add(row);
-//            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("Error on Building Data");
-        }
-    }
-    public void updateData() {
-        Connection table;
-        ResultSet rs;
-        table = DatabaseHandler.getDbConnection();
-        data = FXCollections.observableArrayList();
-        String PostSQL = "SELECT * from " + MainInf.TABLE_OF_INF + " ORDER BY " + MainInf.DEBIT;
-        try {
-            rs = table.createStatement().executeQuery(PostSQL);
-            while (rs.next()) {
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] updated " + row);
-                data.add(row);
             }
             tableView.setItems(data);
             tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -242,5 +193,4 @@ public class ProgrammController {
             System.out.println("Error on Building Data");
         }
     }
-
 }

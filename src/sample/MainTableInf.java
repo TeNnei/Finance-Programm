@@ -1,7 +1,7 @@
 package sample;
 
 import java.util.Date;
-
+// Новый класс решил делать не через пустой конструктор
 public class MainTableInf {
     private int som;
     private int usd;
@@ -23,7 +23,7 @@ public class MainTableInf {
         this.date = date;
     }
 
-    public int getSom1() {
+    public int getSom() {
         return som;
     }
     public void setSom1(int som) {
@@ -35,25 +35,25 @@ public class MainTableInf {
     public void setUsd(int usd) {
         this.usd = usd;
     }
-    public int getDebit1() {
+    public int getDebit() {
         return debit;
     }
     public void setDebit(int debit) {
         this.debit = debit;
     }
-    public int getKredit1() {
+    public int getKredit() {
         return kredit;
     }
     public void setKredit(int kredit) {
         this.kredit = kredit;
     }
-    public String getContract1() {
+    public String getContract() {
         return contract;
     }
     public void setContract1(String contract) {
         this.contract = contract;
     }
-    public String getContract_number1() {
+    public String getContract_number() {
         return contract_number;
     }
     public void setContract_number(String contract_number) {
