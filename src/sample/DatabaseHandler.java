@@ -264,7 +264,7 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateOut (ConsolidInfin auth2){
-        String updateOut = "UPDATE summary SET saldo_out_som = (SELECT saldo_in_som FROM summary WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debet FROM summary WHERE " + ConsolidInf.CODE + " =?) - (SELECT kredit FROM summary WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET saldo_out_som = (SELECT saldo_in_som FROM consolid WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debet FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT kredit FROM consolid WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -358,16 +358,43 @@ public class DatabaseHandler {
     public void consolidUpdateScore(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
         // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
         // так как незнаю откуда брать информацию для второго параметра
-        String updateOut = "UPDATE consolid SET name_score =" + " ?";
+        String updateOut = "UPDATE consolid SET name_score =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getName_of_score());
-//            prepare.setInt(2, auth3.getCode());
+            prepare.setInt(2, auth3.getCode());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
+    }
+    public void consolidUpdateAdditionalScore(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
+        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
+        // так как незнаю откуда брать информацию для второго параметра
+        String updateOut = "UPDATE consolid SET additional_score =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getAdittional_score());
+            prepare.setInt(2, auth3.getCode());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void consolidUpdateCategory(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
+        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
+        // так как незнаю откуда брать информацию для второго параметра
+        String updateOut = "UPDATE consolid SET category =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getCategory());
+            prepare.setInt(2, auth3.getCode());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 }

@@ -9,7 +9,7 @@ public class ConsolidInf {
     public static final String DEBET = "debet";
     public static final String KREDIT = "kredit";
     public static final String SALDO_OUT_SOM = "saldo_out_som";
-    public static final String DIFFERENCE = "difference";
+    public static final String DIFFERENCE = "defference";
     public static final String DEBET_USD = "debit_usd";
     public static final String KREDIT_USD = "credit_usd";
     public static final String SALDO_IN_USD = "saldo_in_usd";

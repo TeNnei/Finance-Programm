@@ -16,7 +16,7 @@ public class ConsolidInfin {
    private int saldo_out_usd;
    private int difference_usd;
 
-   public ConsolidInfin(int code,  String adittional_score, String category, String name_of_score, int debit, int saldo_in_som, int kredit, int saldo_out_som, int difference, int debit_usd, int saldo_in_usd , int kredit_usd,
+   public ConsolidInfin(int code,  String category, String adittional_score, String name_of_score, int saldo_in_som, int debit, int kredit, int saldo_out_som, int difference, int saldo_in_usd, int debit_usd , int kredit_usd,
                              int saldo_out_usd, int difference_usd)
 
    {
@@ -27,7 +27,7 @@ public class ConsolidInfin {
        this.debit = debit;
        this.saldo_in_som = saldo_in_som;
        this.kredit = kredit;
-       this.saldo_in_som = saldo_out_som;
+       this.saldo_out_som = saldo_out_som;
        this.difference = difference;
        this.debit_usd = debit_usd;
        this.saldo_in_usd = saldo_in_usd;
@@ -41,8 +41,8 @@ public class ConsolidInfin {
    }
 
     public ConsolidInfin(String score) {
-       this.name_of_score = score;
        this.adittional_score = score;
+       this.name_of_score = score;
        this.category = score;
     }
 
@@ -138,5 +138,6 @@ public class ConsolidInfin {
     public void setSaldo_out_usd(int saldo_out_usd) {
         this.saldo_out_usd = saldo_out_usd;
     }
+
 }
 

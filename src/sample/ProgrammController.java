@@ -173,14 +173,7 @@ public class ProgrammController {
                 int eght = rs.getInt("usd");
                 // MainTableInf считайте тотже самый класс что и ProgrammData просто я путаться начал и создал отдельный класс
                 MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, sixth, fifth, seventh, eght);
-                TableColumInf.getContract();
-                TableColumInf.getComments();
-                TableColumInf.getDebit();
-                TableColumInf.getContract_number();
-                TableColumInf.getKredit();
-                TableColumInf.getDate();
-                TableColumInf.getSom();
-                TableColumInf.getUsd();
+
                 data.add(TableColumInf);
 
                 Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
