@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,8 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -20,15 +18,27 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ProgrammController {
-    @FXML private TableView<ObservableList> tableView;
+    @FXML private TableView tableView;
     @FXML private Button Continue;
-    private ObservableList<ObservableList> data;
+    private ObservableList data;
     @FXML private Button consolidated;
     @FXML private Button update;
     @FXML private Button excel;
+    @FXML private TableColumn<MainTableInf, Integer> Debit;
+    @FXML private TableColumn<MainTableInf, Integer> Credit;
+    @FXML private TableColumn<MainTableInf, Date> Data;
+    @FXML private TableColumn<MainTableInf, String> Coment;
+    @FXML private TableColumn<MainTableInf, Integer> Som;
+    @FXML private TableColumn<MainTableInf, Integer> Dollars;
+    @FXML private TableColumn<MainTableInf, String> ContractNumber;
+    @FXML private TableColumn<MainTableInf, String> Number;
+
+
     private static final String CONTRACT_NUMBER_COLUMN_HEADER = "№ Договора";
     private static final String NUMBER_COLUMN_HEADER = "Договор";
     private static final String DEBIT_COLUMN_HEADER = "Дебит";
@@ -78,11 +88,11 @@ public class ProgrammController {
                 row = spreadsheet.createRow(i + 1); // Вот здесь я начинаю записывать данные в таблице Excel
                 ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i);
                 for (int j = 0; j < currentRow.size(); j++) {
-                    row.createCell(j).setCellValue(currentRow.get(j));
+                    row.createCell(j, CellType.NUMERIC).setCellValue(currentRow.get(j));
                 }
             }
             if (!(data == null))
-                spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + String.valueOf(0) + ":H" + String.valueOf(data.size())));
+                spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + 0 + ":H" + data.size()));
             FileOutputStream fileOut = null;
             try {
                 fileOut = new FileOutputStream("Main_Information.xls");
@@ -95,6 +105,7 @@ public class ProgrammController {
                 e.printStackTrace();
             }
             try {
+                assert fileOut != null;
                 fileOut.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -102,9 +113,7 @@ public class ProgrammController {
         });
 
 
-        update.setOnAction(actionEvent -> {
-            updateData();
-        });
+        update.setOnAction(actionEvent -> updateData());
 
         buildData();
 
@@ -148,25 +157,44 @@ public class ProgrammController {
         ResultSet rs;
         table = DatabaseHandler.getDbConnection();
         data = FXCollections.observableArrayList();
-        String PostSQL = "SELECT * from " + MainInf.TABLE_OF_INF + " ORDER BY " + MainInf.DEBIT;
+        String PostSQL = "SELECT * FROM " + MainInf.TABLE_OF_INF;
         try {
             rs = table.createStatement().executeQuery(PostSQL);
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-                final int j = i;
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
-                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-                tableView.getColumns().addAll(col);
-                System.out.println("Column [" + i + "] ");
-            }
+           List<MainTableInf> tableinf = new ArrayList<>();
+            while (rs.next()){
 
-            while (rs.next()) {
-                ObservableList<String> row = FXCollections.observableArrayList();
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    row.add(rs.getString(i));
-                }
-                System.out.println("Row [1] added " + row);
-                data.add(row);
+                String first = rs.getString("contract_number");
+                String second = rs.getString("contract");
+                int third = rs.getInt("debit");
+                int fouth = rs.getInt("kredit");
+                String fifth = rs.getString("coments");
+                Date sixth = rs.getDate("date_of");
+                int seventh = rs.getInt("som");
+                int eght = rs.getInt("usd");
+
+                MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, (java.sql.Date) sixth, fifth, seventh, eght);
+
+                TableColumInf.getContract();
+                TableColumInf.getComments();
+                TableColumInf.getDebit();
+                TableColumInf.getContract_number();
+                TableColumInf.getKredit();
+                TableColumInf.getDate();
+                TableColumInf.getSom1();
+                TableColumInf.getUsd();
+                
+                tableinf.add(TableColumInf);
+                data.add(tableinf);
             }
+            Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
+            Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
+            Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
+            Data.setCellValueFactory( new PropertyValueFactory<MainTableInf, Date>("date"));
+            Som.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("som"));
+            Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
+            ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
+            Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
+
             tableView.setItems(data);
             tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         } catch (Exception e) {

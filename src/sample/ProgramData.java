@@ -21,6 +21,7 @@ this.date = data;
 this.som = som;
 this.usd = usd;
 }
+
     public int getDebit() {
         return debit;
     }
@@ -46,28 +47,29 @@ this.usd = usd;
         return usd;
     }
 
-//    public void setCode(int code) {
-//        Code = code;
+//    public void setKredit(int kredit) {
+//        this.kredit = kredit;
 //    }
-//    public void setMoreinf(String moreinf) {
-//        Moreinf = moreinf;
+//    public void setСontract(String сontract) {
+//       this.contract = contract;
 //    }
-//    public void setPod_vid(String pod_vid) {
-//        this.pod_vid = pod_vid;
+//    public void setComments(String comments) {
+//        this.comments = comments;
 //    }
-//    public void setVid(String vid) {
-//        Vid = vid;
+//    public void setContract_number(String contract_number) {
+//        this.contract_number = contract_number;
 //    }
 //    public void setDate(Date date) {
 //        this.date = date;
 //    }
-//    public void setSecondCode(int secondCode) {
-//        SecondCode = secondCode;
+//    public void setDebit(int debit) {
+//        this.debit = debit;
 //    }
-//    public void setSom(int som) {
+//    public void setSom1(int som) {
 //        this.som = som;
 //    }
 //    public void setUsd(int usd) {
 //        this.usd = usd;
 //    }
+
 }
