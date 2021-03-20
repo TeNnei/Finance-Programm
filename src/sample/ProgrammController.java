@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
@@ -20,7 +21,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Date;
-import java.util.List;
 
 public class ProgrammController {
     @FXML private TableView tableView;
@@ -85,11 +85,16 @@ public class ProgrammController {
 
             for (int i = 0; i < tableView.getItems().size(); i++) {
                 spreadsheet.setDefaultColumnWidth(30);
-                row = spreadsheet.createRow(i + 1); // Вот здесь я начинаю записывать данные в таблице Excel
-                ObservableList<String> currentRow = (ObservableList<String>) tableView.getItems().get(i); // вот здесь он ругается на мой класс maintablinf
-                for (int j = 0; j < currentRow.size(); j++) {
-                    row.createCell(j, CellType.NUMERIC).setCellValue(currentRow.get(j));
-                }
+                MainTableInf currentRow = (MainTableInf) tableView.getItems().get(i);
+                row = spreadsheet.createRow(i + 1);
+                row.createCell(0, CellType.STRING).setCellValue(currentRow.getContract_number());// Вот здесь я начинаю записывать данные в таблице Excel
+                row.createCell(1, CellType.STRING).setCellValue(currentRow.getContract());
+                row.createCell(2, CellType.NUMERIC).setCellValue(currentRow.getDebit());
+                row.createCell(3, CellType.NUMERIC).setCellValue(currentRow.getKredit());
+                row.createCell(4, CellType.STRING).setCellValue(currentRow.getDate());
+                row.createCell(5, CellType.STRING).setCellValue(currentRow.getComments());
+                row.createCell(6, CellType.NUMERIC).setCellValue(currentRow.getSom());
+                row.createCell(7, CellType.NUMERIC).setCellValue(currentRow.getUsd());
             }
             if (!(data == null))
                 spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + 0 + ":H" + data.size()));
@@ -177,16 +182,25 @@ public class ProgrammController {
                 TableColumInf.getSom();
                 TableColumInf.getUsd();
                 data.add(TableColumInf);
+
                 Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
                 Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
+
                 Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
+                Coment.setCellFactory(TextFieldTableCell.forTableColumn());
+
                 Data.setCellValueFactory( new PropertyValueFactory<MainTableInf, Date>("date"));
                 Som.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("som"));
                 Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
+
                 ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
+                ContractNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+
                 Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
+                Number.setCellFactory(TextFieldTableCell.forTableColumn());
             }
             tableView.setItems(data);
+            tableView.setEditable(true);
             tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         } catch (Exception e) {
             e.printStackTrace();

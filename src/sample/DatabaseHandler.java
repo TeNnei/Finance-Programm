@@ -355,4 +355,19 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
+    public void consolidUpdateScore(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
+        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
+        // так как незнаю откуда брать информацию для второго параметра
+        String updateOut = "UPDATE consolid SET name_score =" + " ?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getName_of_score());
+//            prepare.setInt(2, auth3.getCode());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
 }

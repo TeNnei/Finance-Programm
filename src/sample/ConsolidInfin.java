@@ -36,8 +36,14 @@ public class ConsolidInfin {
        this.difference_usd = difference_usd;
    }
 
-    public ConsolidInfin() {
+   public ConsolidInfin(){
 
+   }
+
+    public ConsolidInfin(String score) {
+       this.name_of_score = score;
+       this.adittional_score = score;
+       this.category = score;
     }
 
     public ConsolidInfin(int debit){
