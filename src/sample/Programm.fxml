@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -24,14 +25,14 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
          <columns>
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="ContractNumber" prefWidth="75.0" text="Имя договора" />
+            <TableColumn fx:id="Number" prefWidth="75.0" text="Договор" />
+            <TableColumn fx:id="Debit" prefWidth="75.0" text="Дебит" />
+            <TableColumn fx:id="Credit" prefWidth="75.0" text="Кредит" />
+            <TableColumn fx:id="Data" prefWidth="75.0" text="Дата" />
+            <TableColumn fx:id="Coment" prefWidth="75.0" text="Расшифровка" />
+            <TableColumn fx:id="Som" prefWidth="75.0" text="Сумм" />
+            <TableColumn fx:id="Dollars" prefWidth="75.0" text="Доллары" />
          </columns></TableView>
         <Text fontSmoothingType="LCD" stroke="BLACK" strokeWidth="0.0" text="Главная информация" textAlignment="CENTER" textOrigin="CENTER" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
             <font>
@@ -52,6 +53,14 @@
          <font>
             <Font size="20.0" />
          </font>
+      </Button>
+      <Button fx:id="excel" mnemonicParsing="false" text="Excel" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <GridPane.margin>
+            <Insets right="225.0" />
+         </GridPane.margin>
       </Button>
     </children>
 </GridPane>

@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -159,7 +162,7 @@ public class ProgrammController {
         data = FXCollections.observableArrayList();
         String PostSQL = "SELECT * FROM " + MainInf.TABLE_OF_INF;
         try {
-            rs = table.createStatement().executeQuery(PostSQL);
+           rs = table.createStatement().executeQuery(PostSQL);
            List<MainTableInf> tableinf = new ArrayList<>();
             while (rs.next()){
 
@@ -195,6 +198,23 @@ public class ProgrammController {
             Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
             ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
             Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
+
+//            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+//                final int j = i;
+//                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
+//                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>, ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+//                tableView.getColumns().addAll(col);
+//                System.out.println("Column [" + i + "] ");
+//            }
+//
+//            while (rs.next()) {
+//                ObservableList<String> row = FXCollections.observableArrayList();
+//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+//                    row.add(rs.getString(i));
+//                }
+//                System.out.println("Row [1] added " + row);
+//                data.add(row);
+//            }
 
             tableView.setItems(data);
             tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
