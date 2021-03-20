@@ -163,7 +163,7 @@ public class Consolidated {
         ResultSet rs;
         table = DatabaseHandler.getDbConnection();
         data = FXCollections.observableArrayList();
-        String PostSQL = "SELECT * from " + ConsolidInf.TABLE_OF_SUMMARY;
+        String PostSQL = "SELECT * from " + ConsolidInf.TABLE_OF_SUMMARY + " ORDER BY code";
         try {
             rs = table.createStatement().executeQuery(PostSQL);
             while (rs.next()){
@@ -252,6 +252,7 @@ public class Consolidated {
                         }
                 );
                 Code.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, Integer>("code"));
+                Code.setPrefWidth(5);
                 Category.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("category"));
                 Additional_Score.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("adittional_score"));
                 Score.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, String>("name_of_score"));

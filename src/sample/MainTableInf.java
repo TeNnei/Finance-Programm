@@ -12,6 +12,13 @@ public class MainTableInf {
     private String comments;
     private Date date;
 
+    public MainTableInf(String inf){
+        this.contract_number = inf;
+        this.comments = inf;
+        this.contract = inf;
+    }
+
+
     public MainTableInf(String contract_number, String contract, int debit, int kredit, Date date, String comments, int som, int usd) {
         this.som = som;
         this.usd = usd;
@@ -26,7 +33,7 @@ public class MainTableInf {
     public int getSom() {
         return som;
     }
-    public void setSom1(int som) {
+    public void setSom(int som) {
         this.som = som;
     }
     public int getUsd() {

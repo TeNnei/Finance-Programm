@@ -2,6 +2,7 @@ package sample;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,6 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.io.FileNotFoundException;
@@ -158,10 +158,9 @@ public class ProgrammController {
         ResultSet rs;
         table = DatabaseHandler.getDbConnection();
         data = FXCollections.observableArrayList();
-        String PostSQL = "SELECT * FROM " + MainInf.TABLE_OF_INF;
+        String PostSQL = "SELECT * FROM " + MainInf.TABLE_OF_INF + " ORDER BY debit";
         try {
            rs = table.createStatement().executeQuery(PostSQL);
-//           List<MainTableInf> tableinf = new ArrayList<>(); Array list не подходит никак
             while (rs.next()){
                 String first = rs.getString("contract_number");
                 String second = rs.getString("contract");
@@ -177,20 +176,68 @@ public class ProgrammController {
                 data.add(TableColumInf);
 
                 Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
+
                 Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
 
                 Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
                 Coment.setCellFactory(TextFieldTableCell.forTableColumn());
+                Coment.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MainTableInf, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MainTableInf, String> mainTableInfStringCellEditEvent) {
+                        DatabaseHandler cd = new DatabaseHandler();
+                        (mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow()))
+                                .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
+                        String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
+                        MainTableInf c  = new MainTableInf(a);
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        cd.mainTableUpdateComments(c);
+                        buildData();
+                    }
+                });
 
                 Data.setCellValueFactory( new PropertyValueFactory<MainTableInf, Date>("date"));
+
                 Som.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("som"));
+
                 Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
 
                 ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
                 ContractNumber.setCellFactory(TextFieldTableCell.forTableColumn());
+                ContractNumber.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MainTableInf, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MainTableInf, String> mainTableInfStringCellEditEvent) {
+                        DatabaseHandler cd = new DatabaseHandler();
+                        (mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow()))
+                                .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
+                        String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
+                        MainTableInf c  = new MainTableInf(a);
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        cd.mainTableUpdateContractNumber(c);
+                        buildData();
+                    }
+                });
 
                 Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
                 Number.setCellFactory(TextFieldTableCell.forTableColumn());
+                Number.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<MainTableInf, String>>() {
+                    @Override
+                    public void handle(TableColumn.CellEditEvent<MainTableInf, String> mainTableInfStringCellEditEvent) {
+                        DatabaseHandler cd = new DatabaseHandler();
+                        (mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow()))
+                                .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
+                        String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
+                        MainTableInf c  = new MainTableInf(a);
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
+                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        cd.mainTableUpdateContract(c);
+                        buildData();
+                    }
+                });
             }
             tableView.setItems(data);
             tableView.setEditable(true);

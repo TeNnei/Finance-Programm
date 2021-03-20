@@ -355,9 +355,7 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
-    public void consolidUpdateScore(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
-        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
-        // так как незнаю откуда брать информацию для второго параметра
+    public void consolidUpdateScore(ConsolidInfin auth3){
         String updateOut = "UPDATE consolid SET name_score =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
@@ -369,9 +367,7 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
-    public void consolidUpdateAdditionalScore(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
-        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
-        // так как незнаю откуда брать информацию для второго параметра
+    public void consolidUpdateAdditionalScore(ConsolidInfin auth3){
         String updateOut = "UPDATE consolid SET additional_score =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
@@ -383,14 +379,48 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
-    public void consolidUpdateCategory(ConsolidInfin auth3){ // вот с помощью вот такого запроса sql я записываю информацию в ячейку БД просто я не могу
-        // здесь написать вот так "UPDATE consolid SET name_score = ? WHERE " + ConsolidInf.CODE + " =?)
-        // так как незнаю откуда брать информацию для второго параметра
+    public void consolidUpdateCategory(ConsolidInfin auth3){
         String updateOut = "UPDATE consolid SET category =" + " ?" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getCategory());
             prepare.setInt(2, auth3.getCode());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void mainTableUpdateContractNumber(MainTableInf auth3){
+        String updateOut = "UPDATE maininf SET contract_number =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getContract_number());
+            prepare.setInt(2, auth3.getSom());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void mainTableUpdateContract(MainTableInf auth3){
+        String updateOut = "UPDATE maininf SET contract =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getContract_number());
+            prepare.setInt(2, auth3.getSom());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void mainTableUpdateComments(MainTableInf auth3){
+        String updateOut = "UPDATE maininf SET coments =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setString(1, auth3.getContract_number());
+            prepare.setInt(2, auth3.getSom());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
