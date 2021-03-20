@@ -1,7 +1,7 @@
 package sample;
 
 public class ConsolidInf {
-    public static final String TABLE_OF_SUMMARY = "summary";
+    public static final String TABLE_OF_SUMMARY = "consolid";
     public static final String CODE = "code";
     public static final String CATEGORY = "category";
     public static final String ADDITIONAL_SCORE = "additional_score";

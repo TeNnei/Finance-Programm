@@ -1,7 +1,5 @@
 package sample;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.util.CellRangeAddress;
@@ -32,14 +29,14 @@ public class ProgrammController {
     @FXML private Button consolidated;
     @FXML private Button update;
     @FXML private Button excel;
-    @FXML private TableColumn<MainTableInf, Integer> Debit;
-    @FXML private TableColumn<MainTableInf, Integer> Credit;
-    @FXML private TableColumn<MainTableInf, Date> Data;
-    @FXML private TableColumn<MainTableInf, String> Coment;
-    @FXML private TableColumn<MainTableInf, Integer> Som;
-    @FXML private TableColumn<MainTableInf, Integer> Dollars;
-    @FXML private TableColumn<MainTableInf, String> ContractNumber;
-    @FXML private TableColumn<MainTableInf, String> Number;
+    @FXML private TableColumn Debit;
+    @FXML private TableColumn Credit;
+    @FXML private TableColumn Data;
+    @FXML private TableColumn Coment;
+    @FXML private TableColumn Som;
+    @FXML private TableColumn Dollars;
+    @FXML private TableColumn ContractNumber;
+    @FXML private TableColumn Number;
 
 
     private static final String CONTRACT_NUMBER_COLUMN_HEADER = "№ Договора";
@@ -163,7 +160,7 @@ public class ProgrammController {
         String PostSQL = "SELECT * FROM " + MainInf.TABLE_OF_INF;
         try {
            rs = table.createStatement().executeQuery(PostSQL);
-           List<MainTableInf> tableinf = new ArrayList<>();
+//           List<MainTableInf> tableinf = new ArrayList<>(); Array list не подходит никак
             while (rs.next()){
 
                 String first = rs.getString("contract_number");
@@ -175,30 +172,31 @@ public class ProgrammController {
                 int seventh = rs.getInt("som");
                 int eght = rs.getInt("usd");
 
-                MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, (java.sql.Date) sixth, fifth, seventh, eght);
+                MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, sixth, fifth, seventh, eght);
 
-                TableColumInf.getContract();
+                TableColumInf.getContract1();
                 TableColumInf.getComments();
-                TableColumInf.getDebit();
-                TableColumInf.getContract_number();
-                TableColumInf.getKredit();
+                TableColumInf.getDebit1();
+                TableColumInf.getContract_number1();
+                TableColumInf.getKredit1();
                 TableColumInf.getDate();
                 TableColumInf.getSom1();
                 TableColumInf.getUsd();
 
+                data.add(TableColumInf);
 
-                tableinf.add(TableColumInf);
-                data.add(tableinf);
+                Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
+                Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
+                Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
+                Data.setCellValueFactory( new PropertyValueFactory<MainTableInf, Date>("date"));
+                Som.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("som"));
+                Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
+                ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
+                Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
+
+                tableView.setItems(data);
+                tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
             }
-            Debit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("debit"));
-            Credit.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("kredit"));
-            Coment.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("comments"));
-            Data.setCellValueFactory( new PropertyValueFactory<MainTableInf, Date>("date"));
-            Som.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("som"));
-            Dollars.setCellValueFactory( new PropertyValueFactory<MainTableInf, Integer>("usd"));
-            ContractNumber.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract_number"));
-            Number.setCellValueFactory( new PropertyValueFactory<MainTableInf, String>("contract"));
-
 //            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
 //                final int j = i;
 //                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1));
@@ -216,8 +214,6 @@ public class ProgrammController {
 //                data.add(row);
 //            }
 
-            tableView.setItems(data);
-            tableView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("Error on Building Data");

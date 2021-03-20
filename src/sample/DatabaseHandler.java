@@ -278,4 +278,82 @@ public class DatabaseHandler {
             throwables.printStackTrace();
         }
     }
+    public void consolidUpdateDifference (ConsolidInfin auth2){
+        String updateOut = "UPDATE consolid SET defference = (SELECT saldo_out_som FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_som FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setInt(1, auth2.getDebit());
+            prepare.setInt(2, auth2.getDebit());
+            prepare.setInt (3, auth2.getDebit());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void  consolidUpdateUsd (ConsolidInfin auth1) {
+        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.SALDO_IN_USD + " = (SELECT SUM (usd) FROM maininf WHERE "
+                + MainInf.DEBIT + " =?" + ")" + " - (SELECT SUM(usd) FROM maininf WHERE " + MainInf.KREDIT +" = ?" + ")" + " WHERE " + ConsolidInf.CODE + " = ?";
+        try {
+            PreparedStatement prepere = getDbConnection().prepareStatement(update);
+            prepere.setInt(1, auth1.getDebit());
+            prepere.setInt(2, auth1.getDebit());
+            prepere.setInt(3, auth1.getDebit());
+            prepere.executeUpdate();
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void  consolidUpdatedebitUsd (ConsolidInfin auth1) {
+        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.DEBET_USD + " = (SELECT SUM (usd) FROM maininf WHERE "
+                + MainInf.DEBIT + " =?)" + " WHERE " + ConsolidInf.CODE +" =?";
+        try {
+            PreparedStatement prepere = getDbConnection().prepareStatement(update);
+            prepere.setInt(1, auth1.getDebit());
+            prepere.setInt(2, auth1.getDebit());
+            prepere.executeUpdate();
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void  consolidUpdatekreditUsd (ConsolidInfin auth1) {
+        String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.KREDIT_USD + " = (SELECT SUM (usd) FROM maininf WHERE "
+                + MainInf.KREDIT + " =?)" + " WHERE " + ConsolidInf.CODE +" =?";
+        try {
+            PreparedStatement prepere = getDbConnection().prepareStatement(update);
+            prepere.setInt(1, auth1.getDebit());
+            prepere.setInt(2, auth1.getDebit());
+            prepere.executeUpdate();
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void consolidUpdateOutUsd (ConsolidInfin auth2){
+        String updateOut = "UPDATE consolid SET saldo_out_usd = (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT credit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setInt(1, auth2.getDebit());
+            prepare.setInt(2, auth2.getDebit());
+            prepare.setInt (3, auth2.getDebit());
+            prepare.setInt(4, auth2.getDebit());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void consolidUpdateDifferenceUsd (ConsolidInfin auth2){
+        String updateOut = "UPDATE consolid SET difference_usd = (SELECT saldo_out_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
+            prepare.setInt(1, auth2.getDebit());
+            prepare.setInt(2, auth2.getDebit());
+            prepare.setInt (3, auth2.getDebit());
+            prepare.executeUpdate();
+        }
+        catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
