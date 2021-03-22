@@ -17,16 +17,17 @@ public class ProgramData {
         this.date2 = To;
     }
 
-public ProgramData(String contract_number, String contract, int debit, int kredit, Date data, String comments, int som, int usd){
-this.contract_number = contract_number;
-this.contract = contract;
-this.debit = debit;
-this.kredit = kredit;
-this.comments = comments;
-this.date = data;
-this.som = som;
-this.usd = usd;
+    public ProgramData(String contract_number, String contract, int debit, int kredit, Date data, String comments, int som, int usd){
+        this.contract_number = contract_number;
+        this.contract = contract;
+        this.debit = debit;
+        this.kredit = kredit;
+        this.comments = comments;
+        this.date = data;
+        this.som = som;
+        this.usd = usd;
 }
+
     public int getDebit() {
         return debit;
     }
@@ -45,11 +46,11 @@ this.usd = usd;
     public int getKredit() {
         return kredit;
     }
-    public Date getDate() {
-        return date;
-    }
     public int getUsd() {
         return usd;
+    }
+    public Date getDate() {
+        return date;
     }
     public Date getDate2() {
         return date2;

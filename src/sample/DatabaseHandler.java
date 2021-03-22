@@ -306,8 +306,9 @@ public class DatabaseHandler {
         }
     }
     public void  consolidTableUpdateDebitByDate(ProgramData auth31){
-        String updateByDate = "UPDATE "+ ConsolidInf.TABLE_OF_SUMMARY + " SET " + ConsolidInf.DEBET + " = (SELECT SUM (som) FROM maininf WHERE "
-                + MainInf.DEBIT +" =10001 AND " + MainInf.DATE +" BETWEEN =? AND =?)"  ;
+        String updateByDate = "SELECT debit, SUM(som) as debit FROM " + MainInf.TABLE_OF_INF
+                + " WHERE date_of >=? AND date_of <=?"
+                + " GROUP BY code";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
             prepare.setDate(1, auth31.getDate());
@@ -318,17 +319,17 @@ public class DatabaseHandler {
         }
     }
 
-    public void  consolidTableUpdateKreditByDate(ConsolidInfin auth3, ProgramData auth31){
-        String updateByDate = "UPDATE "+ ConsolidInf.TABLE_OF_SUMMARY + " SET " + ConsolidInf.DEBET + " = (SELECT SUM (som) FROM maininf WHERE "
-                + MainInf.KREDIT +" =? AND " + MainInf.DATE +" BETWEEN =? AND =?)"  ;
-        try {
-            PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
-            prepare.setInt(1, auth3.getKredit());
-            prepare.setDate(2, auth31.getDate());
-            prepare.setDate(3, auth31.getDate());
-        }catch (SQLException throwables)
-        {
-            throwables.printStackTrace();
-        }
-    }
+//    public void  consolidTableUpdateKreditByDate(ConsolidInfin auth3, ProgramData auth31){
+//        String updateByDate = "UPDATE "+ ConsolidInf.TABLE_OF_SUMMARY + " SET " + ConsolidInf.DEBET + " = (SELECT SUM (som) FROM maininf WHERE "
+//                + MainInf.KREDIT +" =? AND " + MainInf.DATE +" BETWEEN =? AND =?)"  ;
+//        try {
+//            PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
+//            prepare.setInt(1, auth3.getKredit());
+//            prepare.setDate(2, auth31.getDate());
+//            prepare.setDate(3, auth31.getDate());
+//        }catch (SQLException throwables)
+//        {
+//            throwables.printStackTrace();
+//        }
+//    }
 }

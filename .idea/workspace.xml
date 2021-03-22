@@ -10,16 +10,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ConsolidInformation.xls" beforeDir="false" afterPath="$PROJECT_DIR$/ConsolidInformation.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main_Information.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Main_Information.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/DatabaseHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/DatabaseHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Consolidated.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Consolidated.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Consolidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Consolidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/MainTableInf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/MainTableInf.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/ProgramData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ProgramData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ProgrammController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ProgrammController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
