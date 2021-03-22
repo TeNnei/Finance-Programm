@@ -18,7 +18,6 @@ public class MainTableInf {
         this.contract = inf;
     }
 
-
     public MainTableInf(String contract_number, String contract, int debit, int kredit, Date date, String comments, int som, int usd) {
         this.som = som;
         this.usd = usd;

@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -22,6 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 
 public class Consolidated {
@@ -44,6 +42,8 @@ public class Consolidated {
     @FXML private TableColumn SaldoOutUsd;
     @FXML private TableColumn DifferenceUsd;
     @FXML private Button excel;
+    @FXML private DatePicker From;
+    @FXML private DatePicker To;
 
     private static final String CODE = "Код";
     private static final String CATEGORY = "Категория";
@@ -64,6 +64,11 @@ public class Consolidated {
 
     @FXML void initialize (){
         buildTable();
+
+        To.setOnAction(actionEvent -> {
+            DateSet();
+            buildTable();
+        });
 
         excel.setOnAction(actionEvent -> {
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -252,7 +257,7 @@ public class Consolidated {
                         }
                 );
                 Code.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, Integer>("code"));
-                Code.setPrefWidth(5);
+
                 Category.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("category"));
                 Additional_Score.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("adittional_score"));
                 Score.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, String>("name_of_score"));
@@ -275,5 +280,13 @@ public class Consolidated {
             e.printStackTrace();
             System.out.println("Error on Building Data");
         }
+    }
+
+    private void DateSet(){
+        DatabaseHandler dateSet = new DatabaseHandler();
+        Date From1 = Date.valueOf(From.getValue());
+        Date To2 = Date.valueOf(To.getValue());
+        ProgramData a = new ProgramData(From1, To2);
+        dateSet.consolidTableUpdateDebitByDate(a);
     }
 }

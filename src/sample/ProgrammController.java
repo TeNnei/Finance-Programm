@@ -190,8 +190,9 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
-                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
+                        c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateComments(c);
                         buildData();
                     }
@@ -214,8 +215,9 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
-                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
+                        c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateContractNumber(c);
                         buildData();
                     }
@@ -232,8 +234,9 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get
-                                (mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
+                        c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateContract(c);
                         buildData();
                     }

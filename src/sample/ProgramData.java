@@ -10,6 +10,12 @@ public class ProgramData {
     private String contract_number;
     private String comments;
     private Date date;
+    private Date date2;
+
+    public ProgramData(Date From, Date To){
+        this.date = From;
+        this.date2 = To;
+    }
 
 public ProgramData(String contract_number, String contract, int debit, int kredit, Date data, String comments, int som, int usd){
 this.contract_number = contract_number;
@@ -45,29 +51,7 @@ this.usd = usd;
     public int getUsd() {
         return usd;
     }
-
-//    public void setCode(int code) {
-//        Code = code;
-//    }
-//    public void setMoreinf(String moreinf) {
-//        Moreinf = moreinf;
-//    }
-//    public void setPod_vid(String pod_vid) {
-//        this.pod_vid = pod_vid;
-//    }
-//    public void setVid(String vid) {
-//        Vid = vid;
-//    }
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
-//    public void setSecondCode(int secondCode) {
-//        SecondCode = secondCode;
-//    }
-//    public void setSom(int som) {
-//        this.som = som;
-//    }
-//    public void setUsd(int usd) {
-//        this.usd = usd;
-//    }
+    public Date getDate2() {
+        return date2;
+    }
 }

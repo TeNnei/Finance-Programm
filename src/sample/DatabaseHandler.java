@@ -32,138 +32,6 @@ public class DatabaseHandler {
         return   connection;
     }
 
-//    public void writerUser(User org){
-//            String insert = "INSERT INTO " + Constant.TABLE_OF_ORGANIZATION + "(" + Constant.NAME_OF_ORGANIZATIONS
-//                    + "," + Constant.MONEY_OF_ORGANIZATION + "," + Constant.VMONEY_OF_ORGANIZATION +")" + "VALUES(?,?,?)";
-//        try {
-//            PreparedStatement prst = getDbConnection().prepareStatement(insert);
-//            prst.setString(1, org.getOrganization());
-//            prst.setInt(2, org.getMoney());
-//            prst.setInt(3, org.getVmoney());
-//            prst.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-//
-//   public ResultSet getInformation (User auth){
-//  ResultSet resultSet = null;
-//  String select = "SELECT * FROM " + Constant.TABLE_OF_ORGANIZATION + " WHERE "
-//     + Constant.NAME_OF_ORGANIZATIONS + "=?";
-//       try {
-//           PreparedStatement prst0 = getDbConnection().prepareStatement(select);
-//           prst0.setString(1, auth.getOrganization());
-//
-//          resultSet = prst0.executeQuery();
-//       } catch (SQLException throwables) {
-//           throwables.printStackTrace();
-//       }
-//       return resultSet;
-//   }
-//
-//    public ResultSet setInformation (User auth1){
-//        ResultSet resultSet = null;
-//        String select1 = "UPDATE " + Constant.TABLE_OF_ORGANIZATION + " SET " + Constant.MONEY_OF_ORGANIZATION + " = " + Constant.MONEY_OF_ORGANIZATION + " - ?" + " WHERE " + Constant.NAME_OF_ORGANIZATIONS + " =?;";
-//        try {
-//            PreparedStatement prst0 = getDbConnection().prepareStatement(select1);
-//            prst0.setString(2, auth1.getOrganization());
-//            prst0.setInt(1, auth1.getMoney());
-//
-//           prst0.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return resultSet;
-//    }
-//    public ResultSet setInformation1 (User auth2){
-//        ResultSet resultSet = null;
-//        String select1 = "UPDATE " + Constant.TABLE_OF_ORGANIZATION + " SET " + Constant.MONEY_OF_ORGANIZATION + " = " + Constant.MONEY_OF_ORGANIZATION + " + ?" + " WHERE " + Constant.NAME_OF_ORGANIZATIONS + " =?;";
-//        try {
-//            PreparedStatement prst0 = getDbConnection().prepareStatement(select1);
-//            prst0.setString(2, auth2.getOrganization());
-//            prst0.setInt(1, auth2.getMoney());
-//            prst0.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return resultSet;
-//    }
-//    public ResultSet DeleteInformation (User auth1){
-//        ResultSet resultSet = null;
-//        String select1 = "DELETE FROM " + Constant.TABLE_OF_ORGANIZATION + " WHERE "  + Constant.NAME_OF_ORGANIZATIONS + " =?;";
-//        try {
-//            PreparedStatement prst0 = getDbConnection().prepareStatement(select1);
-//            prst0.setString(1, auth1.getOrganization());
-//            prst0.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return resultSet;
-//    }
-//    public ResultSet setInformation2 (User auth1){
-//        ResultSet resultSet = null;
-//        String select1 = "UPDATE " + Constant.TABLE_OF_ORGANIZATION + " SET " + Constant.VMONEY_OF_ORGANIZATION + " = " + Constant.VMONEY_OF_ORGANIZATION + " - ?" + " WHERE " + Constant.NAME_OF_ORGANIZATIONS + " =?;";
-//        try {
-//            PreparedStatement prst0 = getDbConnection().prepareStatement(select1);
-//            prst0.setString(2, auth1.getOrganization());
-//            prst0.setInt(1, auth1.getMoney());
-//
-//            prst0.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return resultSet;
-//    }
-//    public ResultSet setInformation3 (User auth2){
-//        ResultSet resultSet = null;
-//        String select1 = "UPDATE " + Constant.TABLE_OF_ORGANIZATION + " SET " + Constant.VMONEY_OF_ORGANIZATION + " = " + Constant.VMONEY_OF_ORGANIZATION + " + ?" + " WHERE " + Constant.NAME_OF_ORGANIZATIONS + " =?;";
-//        try {
-//            PreparedStatement prst0 = getDbConnection().prepareStatement(select1);
-//            prst0.setString(2, auth2.getOrganization());
-//            prst0.setInt(1, auth2.getMoney());
-//
-//            prst0.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//        return resultSet;
-//    }
-//
-//    public void WriteOperation(User2 org1){
-//        String insert = "INSERT INTO " + Constant2.TABLE_OF_ORGANIZATION + "(" + Constant2.FROM_WHOM
-//                + "," + Constant2.TO_WHOM + "," + Constant2.AMOUNT_OF_TRANSACTION + "," + Constant2.COMMENTS+ "," + Constant2.DATE_OF_TRANSACTION +")" + " VALUES(?,?,?,?,?)";
-//        try {
-//            PreparedStatement prst = getDbConnection().prepareStatement(insert);
-//            prst.setString(1, org1.getFromWhom());
-//            prst.setString(2, org1.getToWhom());
-//            prst.setString(3, org1.getAmount());
-//            prst.setString(4, org1.getComments());
-//            Date utilDate = new Date();
-//            java.sql.Date date = new java.sql.Date(utilDate.getTime());
-//            prst.setDate(5, date);
-//            prst.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-//
-//    public void RegistUser (User3 user){
-//        String insert = "INSERT INTO " + Constant3.TABLE_OF_USER + "(" + Constant3.USER_NAME
-//                + "," + Constant3.SECOND_USER_NAME + "," + Constant3.LOGIN + "," + Constant3.PASSWORD + "," + Constant3.PASSPORT_NUMBER +")" + "VALUES(?,?,?,?,?)";
-//        try {
-//            PreparedStatement prst = getDbConnection().prepareStatement(insert);
-//            prst.setString(1, user.userName());
-//            prst.setString(2, user.secondName());
-//            prst.setString(3, user.Loginin());
-//            prst.setString(4, user.password());
-//            prst.setInt(5, user.getPassportNumber());
-//            prst.executeUpdate();
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
-//    }
-//
-
         public Boolean checkCode(ConsolidInfin auth) {
         ResultSet resultSet = null;
         String select = "SELECT * FROM " + ConsolidInf.TABLE_OF_SUMMARY + " WHERE "
@@ -329,7 +197,9 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateOutUsd (ConsolidInfin auth2){
-        String updateOut = "UPDATE consolid SET saldo_out_usd = (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) + ((SELECT debit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT credit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET saldo_out_usd = (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE
+                + " =?) + ((SELECT debit_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT credit_usd FROM consolid WHERE "
+                + ConsolidInf.CODE + " =?))" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -343,7 +213,9 @@ public class DatabaseHandler {
         }
     }
     public void consolidUpdateDifferenceUsd (ConsolidInfin auth2){
-        String updateOut = "UPDATE consolid SET difference_usd = (SELECT saldo_out_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
+        String updateOut = "UPDATE consolid SET difference_usd = (SELECT saldo_out_usd FROM consolid WHERE "
+                + ConsolidInf.CODE + " =?) - (SELECT saldo_in_usd FROM consolid WHERE " + ConsolidInf.CODE
+                + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setInt(1, auth2.getDebit());
@@ -392,11 +264,13 @@ public class DatabaseHandler {
         }
     }
     public void mainTableUpdateContractNumber(MainTableInf auth3){
-        String updateOut = "UPDATE maininf SET contract_number =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        String updateOut = "UPDATE maininf SET contract_number =" + " ?" + " WHERE " + MainInf.DEBIT + " =? AND " + MainInf.SOM + " =? AND " + MainInf.USD + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getSom());
+            prepare.setInt(2, auth3.getDebit());
+            prepare.setInt(3, auth3.getSom());
+            prepare.setInt(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -404,11 +278,13 @@ public class DatabaseHandler {
         }
     }
     public void mainTableUpdateContract(MainTableInf auth3){
-        String updateOut = "UPDATE maininf SET contract =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        String updateOut = "UPDATE maininf SET contract =" + " ?" + " WHERE " + MainInf.DEBIT + " =? AND " + MainInf.SOM +" =? AND " + MainInf.USD + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getSom());
+            prepare.setInt(2, auth3.getDebit());
+            prepare.setInt(3, auth3.getSom());
+            prepare.setInt(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -416,14 +292,42 @@ public class DatabaseHandler {
         }
     }
     public void mainTableUpdateComments(MainTableInf auth3){
-        String updateOut = "UPDATE maininf SET coments =" + " ?" + " WHERE " + MainInf.DEBIT + " =?";
+        String updateOut = "UPDATE maininf SET coments =" + " ?" + " WHERE " + MainInf.DEBIT + " =? AND " + MainInf.SOM + " =? AND " + MainInf.USD + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getSom());
+            prepare.setInt(2, auth3.getDebit());
+            prepare.setInt(3, auth3.getSom());
+            prepare.setInt(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+    public void  consolidTableUpdateDebitByDate(ProgramData auth31){
+        String updateByDate = "UPDATE "+ ConsolidInf.TABLE_OF_SUMMARY + " SET " + ConsolidInf.DEBET + " = (SELECT SUM (som) FROM maininf WHERE "
+                + MainInf.DEBIT +" =10001 AND " + MainInf.DATE +" BETWEEN =? AND =?)"  ;
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
+            prepare.setDate(1, auth31.getDate());
+            prepare.setDate(2, auth31.getDate2());
+        }catch (SQLException throwables)
+        {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void  consolidTableUpdateKreditByDate(ConsolidInfin auth3, ProgramData auth31){
+        String updateByDate = "UPDATE "+ ConsolidInf.TABLE_OF_SUMMARY + " SET " + ConsolidInf.DEBET + " = (SELECT SUM (som) FROM maininf WHERE "
+                + MainInf.KREDIT +" =? AND " + MainInf.DATE +" BETWEEN =? AND =?)"  ;
+        try {
+            PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
+            prepare.setInt(1, auth3.getKredit());
+            prepare.setDate(2, auth31.getDate());
+            prepare.setDate(3, auth31.getDate());
+        }catch (SQLException throwables)
+        {
             throwables.printStackTrace();
         }
     }
