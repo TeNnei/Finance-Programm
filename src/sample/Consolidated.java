@@ -66,7 +66,7 @@ public class Consolidated {
         buildTable();
 
         To.setOnAction(actionEvent -> {
-            DateSet();
+//            DateSet();
             buildTable();
         });
 
@@ -122,7 +122,7 @@ public class Consolidated {
             cell.setCellValue(DIFFERENCE_USD);
 
             for (int i = 0; i < ConsolidatedTable.getItems().size(); i++) {
-                spreadsheet.setDefaultColumnWidth(30);
+                spreadsheet.setDefaultColumnWidth(20);
                 ConsolidInfin currentRow = (ConsolidInfin) ConsolidatedTable.getItems().get(i);
                 row = spreadsheet.createRow(i + 1);
                 row.createCell(0, CellType.NUMERIC).setCellValue(currentRow.getCode());// Вот здесь я начинаю записывать данные в таблице Excel
@@ -282,11 +282,11 @@ public class Consolidated {
         }
     }
 
-    private void DateSet(){
-        DatabaseHandler dateSet = new DatabaseHandler();
-        Date From1 = Date.valueOf(From.getValue());
-        Date To2 = Date.valueOf(To.getValue());
-        ProgramData a = new ProgramData(From1, To2);
-        dateSet.consolidTableUpdateDebitByDate(a);
-    }
+//    private void DateSet(){
+//        DatabaseHandler dateSet = new DatabaseHandler();
+//        Date From1 = Date.valueOf(From.getValue());
+//        Date To2 = Date.valueOf(To.getValue());
+//        ProgramData a = new ProgramData(From1, To2);
+//        dateSet.consolidTableUpdateDebitByDate(a);
+//    }
 }

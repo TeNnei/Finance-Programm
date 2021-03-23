@@ -96,14 +96,17 @@ public class DatabaseHandler {
     }
     public void  consolidUpdate (ConsolidInfin auth1) {
         String update = "UPDATE " + ConsolidInf.TABLE_OF_SUMMARY +  " SET " + ConsolidInf.SALDO_IN_SOM + " = (SELECT SUM (som) FROM maininf WHERE "
-                + MainInf.DEBIT + " =?" + ")" + " - (SELECT SUM(som) FROM maininf WHERE " + MainInf.KREDIT +" = ?" + ")" + " WHERE " + ConsolidInf.CODE + " = ?";
+                + MainInf.DEBIT + " =?" + ")"  + " - (SELECT SUM(som) FROM maininf WHERE " + MainInf.KREDIT +" = ?" + ")" + " WHERE " + ConsolidInf.CODE + " = ?";
         try {
+
             PreparedStatement prepere = getDbConnection().prepareStatement(update);
             prepere.setInt(1, auth1.getDebit());
             prepere.setInt(2, auth1.getDebit());
             prepere.setInt(3, auth1.getDebit());
             prepere.executeUpdate();
-        }catch (SQLException throwables) {
+
+        }catch (SQLException throwables)
+        {
             throwables.printStackTrace();
         }
     }
@@ -306,9 +309,9 @@ public class DatabaseHandler {
         }
     }
     public void  consolidTableUpdateDebitByDate(ProgramData auth31){
-        String updateByDate = "SELECT debit, SUM(som) as debit FROM " + MainInf.TABLE_OF_INF
+        String updateByDate = "UPDATE consolid SET debit = (SUM(som)  FROM " + MainInf.TABLE_OF_INF
                 + " WHERE date_of >=? AND date_of <=?"
-                + " GROUP BY code";
+                + " GROUP BY code)";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateByDate);
             prepare.setDate(1, auth31.getDate());
