@@ -14,10 +14,6 @@ public class Gotit {
     @FXML
     private Button gotit;
 
-
-    @FXML
-    void gotit(ActionEvent event) { }
-
     @FXML
     void initialize() {
         gotit.setOnAction(actionEvent -> {

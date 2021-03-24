@@ -81,6 +81,20 @@ public class ProgramIn {
         ProgramData inf = new ProgramData(contract_number1, contract1, debit1, credit1, date1, comment, som1, usd1);
         db.writeInProgram(inf);
     }
+    public void checkCodeIn (int code){
+        DatabaseHandler read = new DatabaseHandler();
+        ConsolidInfin pr = new ConsolidInfin();
+        pr.setCode(code);
+        Boolean first = read.checkCode(pr);
+        if(first)
+        {
+            System.out.println("Success!");
+        }
+        else{
+            registConsolidatedInf();
+        }
+    }
+
     public void registConsolidatedInf(){
         int code1 = Integer.parseInt(debit.getText());
         String category1 = " ";
@@ -99,19 +113,6 @@ public class ProgramIn {
         ConsolidInfin input = new ConsolidInfin(code1, category1, adittional_score1, name_of_score1, debit1,
                 saldo_in_som1, kredit1, saldo_out_som1, difference1, debit_usd1, saldo_in_usd1, kredit_usd1, saldo_out_usd1, difference_usd1);
         db.writeInProgram2(input);
-    }
-    public void checkCodeIn (int code){
-        DatabaseHandler read = new DatabaseHandler();
-        ConsolidInfin pr = new ConsolidInfin();
-        pr.setCode(code);
-        Boolean first = read.checkCode(pr);
-        if(first)
-        {
-            System.out.println("Success!");
-        }
-        else{
-            registConsolidatedInf();
-        }
     }
 
     public void updateConsolidInfUsd(){

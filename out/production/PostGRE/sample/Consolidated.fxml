@@ -40,7 +40,7 @@
             <TableColumn fx:id="SaldoOutUsd" prefWidth="75.0" text="Сальдо выход USD" />
             <TableColumn fx:id="DifferenceUsd" prefWidth="75.0" text="Разница USD" />
          </columns></TableView>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Сводка" textAlignment="CENTER" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Сводка" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
          <font>
             <Font size="35.0" />
          </font>
@@ -48,6 +48,11 @@
       <DatePicker fx:id="From" maxHeight="1.7976931348623157E308" prefHeight="58.0" prefWidth="310.0" promptText="С" style="-fx-font-size: 25;" GridPane.columnIndex="1" />
       <DatePicker fx:id="To" maxHeight="1.7976931348623157E308" prefHeight="58.0" prefWidth="302.0" promptText="По" style="-fx-font-size: 25;" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
       <Button fx:id="excel" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="58.0" prefWidth="143.0" text="Excel" GridPane.halignment="RIGHT">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Button>
+      <Button fx:id="back" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="58.0" prefWidth="143.0" text="Back">
          <font>
             <Font size="19.0" />
          </font>

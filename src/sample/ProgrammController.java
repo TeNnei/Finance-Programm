@@ -51,6 +51,22 @@ public class ProgrammController {
     @FXML void initialize(){
 
         excel.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/Done!.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent first = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(first));
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
+            stage.setMaxHeight(400);
+            stage.setMaxWidth(600);
+            stage.show();
+
             HSSFWorkbook workbook = new HSSFWorkbook();
             HSSFSheet spreadsheet = workbook.createSheet("Main_Information");
             HSSFRow row;
@@ -132,8 +148,10 @@ public class ProgrammController {
             stage.setScene(new Scene(first));
             stage.setMinWidth(1366);
             stage.setMinHeight(768);
+            stage.setFullScreen(true);
             stage.show();
             buildData();
+            consolidated.getScene().getWindow().hide();
         });
 
         Continue.setOnAction(actionEvent -> {

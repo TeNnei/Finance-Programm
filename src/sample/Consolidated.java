@@ -4,9 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -44,6 +48,7 @@ public class Consolidated {
     @FXML private Button excel;
     @FXML private DatePicker From;
     @FXML private DatePicker To;
+    @FXML private Button back;
 
     private static final String CODE = "Код";
     private static final String CATEGORY = "Категория";
@@ -64,6 +69,21 @@ public class Consolidated {
 
     @FXML void initialize (){
         buildTable();
+
+        back.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/Programm.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent first = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(first));
+            stage.show();
+            back.getScene().getWindow().hide();
+        });
 
         To.setOnAction(actionEvent -> {
 //            DateSet();
