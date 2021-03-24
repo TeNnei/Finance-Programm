@@ -148,7 +148,6 @@ public class ProgrammController {
             stage.setScene(new Scene(first));
             stage.setMinWidth(1366);
             stage.setMinHeight(768);
-            stage.setFullScreen(true);
             stage.show();
             buildData();
             consolidated.getScene().getWindow().hide();

@@ -1,6 +1,7 @@
 package sample;
-
+import java.util.Date;
 import java.sql.*;
+import java.util.Calendar;
 
 public class DatabaseHandler {
     static final String DB_URL = "jdbc:postgresql://127.0.0.1:5432/postgres";
@@ -68,27 +69,26 @@ public class DatabaseHandler {
         }
     }
 
-    public void writeInProgram2(ConsolidInfin org){
-        String insert = "INSERT INTO " + ConsolidInf.TABLE_OF_SUMMARY + "(" + ConsolidInf.CODE
-                + ", " + ConsolidInf.ADDITIONAL_SCORE + ", " + ConsolidInf.CATEGORY + "," + ConsolidInf.NAME_SCORE + ", "  + ConsolidInf.SALDO_IN_SOM
-                + ", " + ConsolidInf.DEBET + ", " + ConsolidInf.KREDIT + ", " + ConsolidInf.SALDO_OUT_SOM + ", " + ConsolidInf.DIFFERENCE + "," + ConsolidInf.SALDO_IN_USD
-                + ", " + ConsolidInf.DEBET_USD + ", " + ConsolidInf.KREDIT_USD + ", " + ConsolidInf.SALDO_OUT_USD + "," + ConsolidInf.DIFFERENCE_USD +")" + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public void writeInProgram2(SubTotalGetterSetter org){
+        String insert = "INSERT INTO " + SummarySubTotal.TABLE_OF_SUBTOTAL + "(" + SummarySubTotal.CODE
+                + ", " + SummarySubTotal.SALDO_IN_SOM + ", " + SummarySubTotal.DEBET_SOM + ", " + SummarySubTotal.KREDIT_SOM + ", "
+                + SummarySubTotal.SALDO_OUT_SOM + ", " + SummarySubTotal.SALDO_IN_USD + ", " +SummarySubTotal.DEBET_USD + "," + SummarySubTotal.KREDIT_USD +", "
+                + SummarySubTotal.SALDO_OUT_USD +")"
+                + "VALUES(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement prst = getDbConnection().prepareStatement(insert);
             prst.setInt(1, org.getCode());
-            prst.setString(2, org.getAdittional_score());
-            prst.setString(3, org.getCategory());
-            prst.setString(4, org.getName_of_score());
-            prst.setInt(5, org.getSaldo_in_som());
-            prst.setInt(6, org.getDebit());
-            prst.setInt(7, org.getKredit());
-            prst.setInt(8, org.getSaldo_out_som());
-            prst.setInt(9, org.getDifference());
-            prst.setInt(10, org.getSaldo_in_usd());
-            prst.setInt(11, org.getDebit_usd());
-            prst.setInt(12, org.getKredit_usd());
-            prst.setInt(13, org.getSaldo_out_usd());
-            prst.setInt(14, org.getDifference_usd());
+            prst.setInt(2, org.getSaldo_in_som());
+            prst.setInt(3, org.getDebit());
+            prst.setInt(4, org.getKredit());
+            prst.setInt(5, org.getSaldo_out_som());
+            prst.setInt(6, org.getSaldo_in_usd());
+            prst.setInt(7, org.getDebit_usd());
+            prst.setInt(8, org.getKredit_usd());
+            prst.setInt(9, org.getSaldo_out_usd());
+            Date utilDate = null;
+            java.sql.Date date = new java.sql.Date(utilDate.getTime());
+            prst.setDate(10, date);
             prst.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();

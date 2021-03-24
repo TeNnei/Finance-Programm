@@ -97,21 +97,15 @@ public class ProgramIn {
 
     public void registConsolidatedInf(){
         int code1 = Integer.parseInt(debit.getText());
-        String category1 = " ";
-        String adittional_score1 = " ";
-        String name_of_score1 = " ";
         int debit1 = 0;
         int saldo_in_som1 = 0;
         int kredit1 = 0;
         int saldo_out_som1 = 0;
-        int difference1 = 0;
         int debit_usd1 = 0;
         int saldo_in_usd1 = 0;
         int kredit_usd1 = 0;
         int saldo_out_usd1 = 0;
-        int difference_usd1 = 0;
-        ConsolidInfin input = new ConsolidInfin(code1, category1, adittional_score1, name_of_score1, debit1,
-                saldo_in_som1, kredit1, saldo_out_som1, difference1, debit_usd1, saldo_in_usd1, kredit_usd1, saldo_out_usd1, difference_usd1);
+       SubTotalGetterSetter input = new SubTotalGetterSetter(code1, saldo_in_som1, debit1, kredit1, saldo_out_som1, saldo_in_usd1, debit_usd1, kredit_usd1, saldo_out_usd1);
         db.writeInProgram2(input);
     }
 

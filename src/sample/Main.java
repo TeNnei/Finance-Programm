@@ -12,8 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Programm.fxml"));
         primaryStage.setTitle("ProGRE");
-        primaryStage.setScene(new Scene(root, 1920, 1080));
-        primaryStage.setFullScreen(true);
+        primaryStage.setScene(new Scene(root, 1366, 720));
         primaryStage.show();
     }
     public static void main(String[] args) {
