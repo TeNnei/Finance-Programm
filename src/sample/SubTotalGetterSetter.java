@@ -1,5 +1,7 @@
 package sample;
 
+import java.sql.Date;
+
 public class SubTotalGetterSetter {
     private int code;
     private int debit;
@@ -10,6 +12,13 @@ public class SubTotalGetterSetter {
     private int saldo_in_usd;
     private int kredit_usd;
     private int saldo_out_usd;
+    private Date todayFrom;
+    private Date todayTo;
+
+    public SubTotalGetterSetter(Date todayFrom, Date todayTo) {
+        this.todayFrom = todayFrom;
+        this.todayTo = todayTo;
+    }
 
     public SubTotalGetterSetter(int code, int saldo_in_som, int debit, int kredit, int saldo_out_som, int saldo_in_usd, int debit_usd, int kredit_usd, int saldo_out_usd) {
         this.code = code;
@@ -23,6 +32,12 @@ public class SubTotalGetterSetter {
         this.saldo_out_usd = saldo_out_usd;
     }
 
+    public Date getTodayTo() {
+        return todayTo;
+    }
+    public Date getTodayFrom() {
+        return todayFrom;
+    }
     public int getCode() {
         return code;
     }
@@ -51,6 +66,12 @@ public class SubTotalGetterSetter {
         return saldo_out_usd;
     }
 
+    public void setTodayTo(Date todayTo) {
+        this.todayTo = todayTo;
+    }
+    public void setToday(Date today) {
+        this.todayFrom = today;
+    }
     public void setCode(int code) {
         this.code = code;
     }

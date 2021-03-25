@@ -23,7 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class Consolidated {
 
@@ -85,7 +87,11 @@ public class Consolidated {
         });
 
         To.setOnAction(actionEvent -> {
-//            DateSet();
+            try {
+                DateSet();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             buildTable();
         });
 
@@ -301,11 +307,18 @@ public class Consolidated {
         }
     }
 
-//    private void DateSet(){
-//        DatabaseHandler dateSet = new DatabaseHandler();
-//        Date From1 = Date.valueOf(From.getValue());
-//        Date To2 = Date.valueOf(To.getValue());
-//        ProgramData a = new ProgramData(From1, To2);
-//        dateSet.consolidTableUpdateDebitByDate(a);
-//    }
+    private void DateSet() throws SQLException {
+        DatabaseHandler dateSet = new DatabaseHandler();
+        Date From1 = Date.valueOf(From.getValue());
+        Date To2 = Date.valueOf(To.getValue());
+        SubTotalGetterSetter a = new SubTotalGetterSetter(From1, To2);
+        dateSet.consolidinfDate(a);
+        dateSet.consolidinfDateCredit(a);
+        dateSet.consolidinfDateSaldoInSom(a);
+        dateSet.consolidinfDateSaldoOutSom(a);
+        dateSet.consolidinfDateSaldoInUsd(a);
+        dateSet.consolidinfDateDebitUsd(a);
+        dateSet.consolidinfDateCreditUsd(a);
+        dateSet.consolidinfDateSaldoOutUsd(a);
+    }
 }

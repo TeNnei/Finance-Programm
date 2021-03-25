@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginIN">
+   <children>
+      <TextField fx:id="log" alignment="CENTER" layoutX="14.0" layoutY="153.0" prefHeight="70.0" prefWidth="250.0" promptText="Логин">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </TextField>
+      <Button fx:id="logiIN" layoutX="234.0" layoutY="256.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="133.0" text="Вход">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Button>
+      <Text layoutX="89.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Финансовые операции" textAlignment="CENTER">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Text>
+      <PasswordField fx:id="pass" alignment="CENTER" layoutX="336.0" layoutY="153.0" prefHeight="70.0" prefWidth="250.0" promptText="Пароль">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </PasswordField>
+   </children>
+</AnchorPane>
