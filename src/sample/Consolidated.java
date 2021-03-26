@@ -22,6 +22,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -150,20 +151,20 @@ public class Consolidated {
                 spreadsheet.setDefaultColumnWidth(20);
                 ConsolidInfin currentRow = (ConsolidInfin) ConsolidatedTable.getItems().get(i);
                 row = spreadsheet.createRow(i + 1);
-                row.createCell(0, CellType.NUMERIC).setCellValue(currentRow.getCode());// Вот здесь я начинаю записывать данные в таблице Excel
+                row.createCell(0, CellType.STRING).setCellValue(currentRow.getCode());// Вот здесь я начинаю записывать данные в таблице Excel
                 row.createCell(1, CellType.STRING).setCellValue(currentRow.getCategory());
                 row.createCell(2, CellType.STRING).setCellValue(currentRow.getAdittional_score());
                 row.createCell(3, CellType.STRING).setCellValue(currentRow.getName_of_score());
-                row.createCell(4, CellType.NUMERIC).setCellValue(currentRow.getSaldo_in_som());
-                row.createCell(5, CellType.NUMERIC).setCellValue(currentRow.getDebit());
-                row.createCell(6, CellType.NUMERIC).setCellValue(currentRow.getKredit());
-                row.createCell(7, CellType.NUMERIC).setCellValue(currentRow.getSaldo_in_usd());
-                row.createCell(8, CellType.NUMERIC).setCellValue(currentRow.getDifference());
-                row.createCell(9, CellType.NUMERIC).setCellValue(currentRow.getSaldo_in_usd());
-                row.createCell(10, CellType.NUMERIC).setCellValue(currentRow.getDebit_usd());
-                row.createCell(11, CellType.NUMERIC).setCellValue(currentRow.getKredit_usd());
-                row.createCell(12, CellType.NUMERIC).setCellValue(currentRow.getSaldo_out_usd());
-                row.createCell(13, CellType.NUMERIC).setCellValue(currentRow.getDifference_usd());
+                row.createCell(4, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getSaldo_in_som())));
+                row.createCell(5, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getDebit())));
+                row.createCell(6, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getKredit())));
+                row.createCell(7, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getSaldo_in_usd())));
+                row.createCell(8, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getDifference())));
+                row.createCell(9, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getSaldo_in_usd())));
+                row.createCell(10, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getDebit_usd())));
+                row.createCell(11, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getKredit_usd())));
+                row.createCell(12, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getSaldo_out_usd())));
+                row.createCell(13, CellType.NUMERIC).setCellValue(Double.valueOf(String.valueOf(currentRow.getDifference_usd())));
             }
             if (!(data == null))
                 spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + 0 + ":N" + data.size()));
@@ -197,20 +198,20 @@ public class Consolidated {
         try {
             rs = table.createStatement().executeQuery(PostSQL);
             while (rs.next()){
-                int first = rs.getInt("code");
+                String first = rs.getString("code");
                 String second = rs.getString("category");
                 String second1 = rs.getString("additional_score");
                 String third = rs.getString("name_score");
-                int fouth = rs.getInt("saldo_in_som");
-                int fifth = rs.getInt("debet");
-                int sixth = rs.getInt("kredit");
-                int seventh = rs.getInt("saldo_out_som");
-                int eight = rs.getInt("defference");
-                int nine = rs.getInt("saldo_in_usd");
-                int ten = rs.getInt("debit_usd");
-                int eleven = rs.getInt("credit_usd");
-                int twelve = rs.getInt("saldo_out_usd");
-                int thirteen = rs.getInt("difference_usd");
+                BigDecimal fouth = rs.getBigDecimal("saldo_in_som");
+                BigDecimal fifth = rs.getBigDecimal("debet");
+                BigDecimal sixth = rs.getBigDecimal("kredit");
+                BigDecimal seventh = rs.getBigDecimal("saldo_out_som");
+                BigDecimal eight = rs.getBigDecimal("defference");
+                BigDecimal nine = rs.getBigDecimal("saldo_in_usd");
+                BigDecimal ten = rs.getBigDecimal("debit_usd");
+                BigDecimal eleven = rs.getBigDecimal("credit_usd");
+                BigDecimal twelve = rs.getBigDecimal("saldo_out_usd");
+                BigDecimal thirteen = rs.getBigDecimal("difference_usd");
                 // MainTableInf считайте тотже самый класс что и ProgrammData просто я путаться начал и создал отдельный класс
                 ConsolidInfin ConsolidInfTable = new ConsolidInfin(first, second, second1, third, fouth, fifth, sixth, seventh, eight,
                         nine, ten, eleven, twelve, thirteen);
@@ -232,8 +233,8 @@ public class Consolidated {
                                         .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
                                 String a = String.valueOf(consolidInfinStringCellEditEvent.getNewValue());
                                 ConsolidInfin c  = new ConsolidInfin(a);
-                                c.setCode((consolidInfinStringCellEditEvent.getTableView().getItems().get
-                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode());
+                                c.setCode(String.valueOf(Integer.parseInt((consolidInfinStringCellEditEvent.getTableView().getItems().get
+                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode())));
                                 db.consolidUpdateCategory(c);
                                 buildTable ();
                             }
@@ -253,8 +254,8 @@ public class Consolidated {
                                         .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
                                 String a = String.valueOf(consolidInfinStringCellEditEvent.getNewValue());
                                 ConsolidInfin c  = new ConsolidInfin(a);
-                                c.setCode((consolidInfinStringCellEditEvent.getTableView().getItems().get
-                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode());
+                                c.setCode(String.valueOf(Integer.parseInt((consolidInfinStringCellEditEvent.getTableView().getItems().get
+                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode())));
                                 db.consolidUpdateAdditionalScore(c);
                                 buildTable ();
                             }
@@ -274,8 +275,8 @@ public class Consolidated {
                                         .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
                                 String a = String.valueOf(consolidInfinStringCellEditEvent.getNewValue());
                                 ConsolidInfin c  = new ConsolidInfin(a);
-                                c.setCode((consolidInfinStringCellEditEvent.getTableView().getItems().get
-                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode());
+                                c.setCode(String.valueOf(Integer.parseInt((consolidInfinStringCellEditEvent.getTableView().getItems().get
+                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode())));
                                 db.consolidUpdateScore(c);
                                 buildTable ();
                             }

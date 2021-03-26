@@ -1,11 +1,12 @@
 package sample;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 public class ProgramData {
-    private int som;
-    private int usd;
-    private int debit;
-    private int kredit;
+    private BigDecimal som;
+    private BigDecimal usd;
+    private String debit;
+    private String kredit;
     private String contract;
     private String contract_number;
     private String comments;
@@ -17,7 +18,7 @@ public class ProgramData {
         this.date2 = To;
     }
 
-    public ProgramData(String contract_number, String contract, int debit, int kredit, Date data, String comments, int som, int usd){
+    public ProgramData(String contract_number, String contract, String debit, String kredit, Date data, String comments, BigDecimal som, BigDecimal usd){
         this.contract_number = contract_number;
         this.contract = contract;
         this.debit = debit;
@@ -28,7 +29,7 @@ public class ProgramData {
         this.usd = usd;
 }
 
-    public int getDebit() {
+    public String getDebit() {
         return debit;
     }
     public String getComments() {
@@ -40,19 +41,16 @@ public class ProgramData {
     public String getContract() {
         return contract;
     }
-    public int getSom() {
+    public BigDecimal getSom() {
         return som;
     }
-    public int getKredit() {
+    public String getKredit() {
         return kredit;
     }
-    public int getUsd() {
+    public BigDecimal getUsd() {
         return usd;
     }
     public Date getDate() {
         return date;
-    }
-    public Date getDate2() {
-        return date2;
     }
 }

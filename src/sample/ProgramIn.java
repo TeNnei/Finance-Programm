@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.sql.Date;
 
@@ -57,23 +58,23 @@ public class ProgramIn {
     public void registOperation () throws ParseException {
         String contract_number1 = contract_number.getText();
         String contract1 = contract.getText();
-        int som1;
+       BigDecimal som1;
         if (som.getText().equals("")){
-            som1 = 0;
+            som1 = BigDecimal.valueOf(0);
         }else
         {
-            som1 = Integer.parseInt(som.getText());
+            som1 = BigDecimal.valueOf(Integer.parseInt(som.getText()));
         }
-        int debit1 = Integer.parseInt(debit.getText());
-        int credit1 = Integer.parseInt(kredit.getText());
+        String  debit1 = debit.getText();
+        String credit1 = kredit.getText();
         Date date1 = Date.valueOf(date.getValue());
         String comment = comments.getText();
-        int usd1;
+        BigDecimal usd1;
         if (usd.getText().equals("")) {
-            usd1 = 0;
+            usd1 = BigDecimal.valueOf(0.0);
         }else
         {
-            usd1 = Integer.parseInt(usd.getText());
+            usd1 = BigDecimal.valueOf(Long.parseLong(usd.getText()));
         }
         ProgramData inf = new ProgramData(contract_number1, contract1, debit1, credit1, date1, comment, som1, usd1);
         db.writeInProgram(inf);

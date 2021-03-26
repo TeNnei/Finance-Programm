@@ -1,12 +1,13 @@
 package sample;
 
+import java.math.BigDecimal;
 import java.util.Date;
 // Новый класс решил делать не через пустой конструктор
 public class MainTableInf {
-    private int som;
-    private int usd;
-    private int debit;
-    private int kredit;
+    private BigDecimal som;
+    private BigDecimal usd;
+    private String debit;
+    private String kredit;
     private String contract;
     private String contract_number;
     private String comments;
@@ -18,7 +19,7 @@ public class MainTableInf {
         this.contract = inf;
     }
 
-    public MainTableInf(String contract_number, String contract, int debit, int kredit, Date date, String comments, int som, int usd) {
+    public MainTableInf(String contract_number, String contract, String debit, String kredit, Date date, String comments, BigDecimal som, BigDecimal usd) {
         this.som = som;
         this.usd = usd;
         this.debit = debit;
@@ -29,28 +30,28 @@ public class MainTableInf {
         this.date = date;
     }
 
-    public int getSom() {
+    public BigDecimal getSom() {
         return som;
     }
-    public void setSom(int som) {
+    public void setSom(BigDecimal som) {
         this.som = som;
     }
-    public int getUsd() {
+    public BigDecimal getUsd() {
         return usd;
     }
-    public void setUsd(int usd) {
+    public void setUsd(BigDecimal usd) {
         this.usd = usd;
     }
-    public int getDebit() {
+    public String getDebit() {
         return debit;
     }
-    public void setDebit(int debit) {
+    public void setDebit(String debit) {
         this.debit = debit;
     }
-    public int getKredit() {
+    public String getKredit() {
         return kredit;
     }
-    public void setKredit(int kredit) {
+    public void setKredit(String kredit) {
         this.kredit = kredit;
     }
     public String getContract() {

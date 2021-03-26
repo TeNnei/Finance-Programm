@@ -56,12 +56,12 @@ public class DatabaseHandler {
             PreparedStatement prst = getDbConnection().prepareStatement(insert);
             prst.setString(1, org.getContract_number());
             prst.setString(2, org.getContract());
-            prst.setInt(3, org.getDebit());
-            prst.setInt(4, org.getKredit());
+            prst.setString(3, org.getDebit());
+            prst.setString(4, org.getKredit());
             prst.setDate(5, org.getDate());
             prst.setString(6, org.getComments());
-            prst.setInt(7, org.getSom());
-            prst.setInt(8, org.getUsd());
+            prst.setBigDecimal(7, org.getSom());
+            prst.setBigDecimal(8, org.getUsd());
             prst.executeUpdate();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -72,9 +72,9 @@ public class DatabaseHandler {
         String updateOut = "UPDATE consolid SET defference = (SELECT saldo_out_som FROM consolid WHERE " + ConsolidInf.CODE + " =?) - (SELECT saldo_in_som FROM consolid WHERE " + ConsolidInf.CODE + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
-            prepare.setInt(1, auth2.getDebit());
-            prepare.setInt(2, auth2.getDebit());
-            prepare.setInt (3, auth2.getDebit());
+            prepare.setBigDecimal(1, auth2.getDebit());
+            prepare.setBigDecimal(2, auth2.getDebit());
+            prepare.setBigDecimal (3, auth2.getDebit());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -88,9 +88,9 @@ public class DatabaseHandler {
                 + " =?)" + " WHERE " + ConsolidInf.CODE + " =?";
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
-            prepare.setInt(1, auth2.getDebit());
-            prepare.setInt(2, auth2.getDebit());
-            prepare.setInt (3, auth2.getDebit());
+            prepare.setBigDecimal(1, auth2.getDebit());
+            prepare.setBigDecimal(2, auth2.getDebit());
+            prepare.setBigDecimal (3, auth2.getDebit());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -103,7 +103,7 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getName_of_score());
-            prepare.setInt(2, auth3.getCode());
+            prepare.setString(2, auth3.getCode());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -115,7 +115,7 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getAdittional_score());
-            prepare.setInt(2, auth3.getCode());
+            prepare.setString(2, auth3.getCode());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -127,7 +127,7 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getCategory());
-            prepare.setInt(2, auth3.getCode());
+            prepare.setString(2, auth3.getCode());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -139,9 +139,9 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getDebit());
-            prepare.setInt(3, auth3.getSom());
-            prepare.setInt(4, auth3.getUsd());
+            prepare.setString(2, auth3.getDebit());
+            prepare.setBigDecimal(3, auth3.getSom());
+            prepare.setBigDecimal(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -153,9 +153,9 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getDebit());
-            prepare.setInt(3, auth3.getSom());
-            prepare.setInt(4, auth3.getUsd());
+            prepare.setString(2, auth3.getDebit());
+            prepare.setBigDecimal(3, auth3.getSom());
+            prepare.setBigDecimal(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -167,9 +167,9 @@ public class DatabaseHandler {
         try {
             PreparedStatement prepare = getDbConnection().prepareStatement(updateOut);
             prepare.setString(1, auth3.getContract_number());
-            prepare.setInt(2, auth3.getDebit());
-            prepare.setInt(3, auth3.getSom());
-            prepare.setInt(4, auth3.getUsd());
+            prepare.setString(2, auth3.getDebit());
+            prepare.setBigDecimal(3, auth3.getSom());
+            prepare.setBigDecimal(4, auth3.getUsd());
             prepare.executeUpdate();
         }
         catch (SQLException throwables) {
@@ -185,10 +185,9 @@ public class DatabaseHandler {
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateSaldoInSom (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_SOM + "= (SELECT SUM (saldo_in_som) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_SOM + "= COALESCE((SELECT saldo_out_som FROM summary_subtotal WHERE code = consolid.code AND today < ? ORDER BY today DESC LIMIT 1), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
-        dateinfTable.setDate(1, dateinf.getTodayFrom());
-        dateinfTable.setDate(2, dateinf.getTodayTo());
+        dateinfTable.setDate(1, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateCredit (SubTotalGetterSetter dateinf) throws SQLException {
@@ -206,10 +205,9 @@ public class DatabaseHandler {
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateSaldoInUsd (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_USD + "= (SELECT SUM (saldo_in_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_USD + "= COALESCE((SELECT saldo_out_usd FROM summary_subtotal WHERE code = consolid.code AND today < ? ORDER BY today DESC LIMIT 1), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
-        dateinfTable.setDate(1, dateinf.getTodayFrom());
-        dateinfTable.setDate(2, dateinf.getTodayTo());
+        dateinfTable.setDate(1, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateDebitUsd (SubTotalGetterSetter dateinf) throws SQLException {
@@ -227,7 +225,7 @@ public class DatabaseHandler {
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateSaldoOutUsd (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_SOM + "= (SELECT SUM (saldo_out_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_USD + " = (SELECT SUM (saldo_out_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());

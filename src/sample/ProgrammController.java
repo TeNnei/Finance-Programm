@@ -18,6 +18,7 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.Date;
@@ -37,6 +38,7 @@ public class ProgrammController {
     @FXML private TableColumn Dollars;
     @FXML private TableColumn ContractNumber;
     @FXML private TableColumn Number;
+    @FXML private Button Import;
 
 
     private static final String CONTRACT_NUMBER_COLUMN_HEADER = "№ Договора";
@@ -49,6 +51,13 @@ public class ProgrammController {
     private static final String USD_COLUMN_HEADER = "Доллары";
 
     @FXML void initialize(){
+
+        Import.setOnAction(actionEvent -> {
+            String  a = "";
+            InsertFromExcel b = new InsertFromExcel();
+            b.InsertFromExcel(a);
+
+        });
 
         excel.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
@@ -109,8 +118,8 @@ public class ProgrammController {
                 row.createCell(3, CellType.NUMERIC).setCellValue(currentRow.getKredit());
                 row.createCell(4, CellType.STRING).setCellValue(currentRow.getDate());
                 row.createCell(5, CellType.STRING).setCellValue(currentRow.getComments());
-                row.createCell(6, CellType.NUMERIC).setCellValue(currentRow.getSom());
-                row.createCell(7, CellType.NUMERIC).setCellValue(currentRow.getUsd());
+                row.createCell(6, CellType.NUMERIC).setCellValue(String.valueOf(currentRow.getSom()));
+                row.createCell(7, CellType.NUMERIC).setCellValue(String.valueOf(currentRow.getUsd()));
             }
             if (!(data == null))
                 spreadsheet.setAutoFilter(CellRangeAddress.valueOf("A" + 0 + ":H" + data.size()));
@@ -181,12 +190,12 @@ public class ProgrammController {
             while (rs.next()){
                 String first = rs.getString("contract_number");
                 String second = rs.getString("contract");
-                int third = rs.getInt("debit");
-                int fouth = rs.getInt("kredit");
+                String third = rs.getString("debit");
+                String fouth = rs.getString("kredit");
                 String fifth = rs.getString("coments");
                 Date sixth = rs.getDate("date_of");
-                int seventh = rs.getInt("som");
-                int eght = rs.getInt("usd");
+                BigDecimal seventh = rs.getBigDecimal("som");
+                BigDecimal eght = rs.getBigDecimal("usd");
                 // MainTableInf считайте тотже самый класс что и ProgrammData просто я путаться начал и создал отдельный класс
                 MainTableInf TableColumInf = new MainTableInf(first, second, third, fouth, sixth, fifth, seventh, eght);
 
@@ -207,7 +216,7 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit(String.valueOf(mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow()).getDebit()));
                         c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
                         c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateComments(c);
@@ -232,7 +241,7 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit(String.valueOf(mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow()).getDebit()));
                         c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
                         c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateContractNumber(c);
@@ -251,7 +260,7 @@ public class ProgrammController {
                                 .setContract_number(mainTableInfStringCellEditEvent.getNewValue());
                         String a = String.valueOf(mainTableInfStringCellEditEvent.getNewValue());
                         MainTableInf c  = new MainTableInf(a);
-                        c.setDebit((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getDebit());
+                        c.setDebit(String.valueOf(mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow()).getDebit()));
                         c.setSom((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getSom());
                         c.setUsd((mainTableInfStringCellEditEvent.getTableView().getItems().get(mainTableInfStringCellEditEvent.getTablePosition().getRow())).getUsd());
                         cd.mainTableUpdateContract(c);

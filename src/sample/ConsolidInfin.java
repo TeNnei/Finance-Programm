@@ -1,23 +1,25 @@
 package sample;
 
+import java.math.BigDecimal;
+
 public class ConsolidInfin {
-   private int code;
+   private String code;
    private String category;
    private String adittional_score;
    private String name_of_score;
-   private int debit;
-   private int saldo_in_som;
-   private int kredit;
-   private int saldo_out_som;
-   private int difference;
-   private int debit_usd;
-   private int saldo_in_usd;
-   private int kredit_usd;
-   private int saldo_out_usd;
-   private int difference_usd;
+   private BigDecimal debit;
+   private BigDecimal saldo_in_som;
+   private BigDecimal kredit;
+   private BigDecimal saldo_out_som;
+   private BigDecimal difference;
+   private BigDecimal debit_usd;
+   private BigDecimal saldo_in_usd;
+   private BigDecimal kredit_usd;
+   private BigDecimal saldo_out_usd;
+   private BigDecimal difference_usd;
 
-   public ConsolidInfin(int code,  String category, String adittional_score, String name_of_score, int saldo_in_som, int debit, int kredit, int saldo_out_som, int difference, int saldo_in_usd, int debit_usd , int kredit_usd,
-                             int saldo_out_usd, int difference_usd)
+   public ConsolidInfin(String code,  String category, String adittional_score, String name_of_score, BigDecimal saldo_in_som, BigDecimal debit, BigDecimal kredit, BigDecimal saldo_out_som, BigDecimal difference, BigDecimal saldo_in_usd, BigDecimal debit_usd , BigDecimal kredit_usd,
+                        BigDecimal saldo_out_usd, BigDecimal difference_usd)
 
    {
        this.code = code;
@@ -46,41 +48,41 @@ public class ConsolidInfin {
        this.category = score;
     }
 
-    public ConsolidInfin(int debit){
+    public ConsolidInfin(BigDecimal debit){
        this.debit = debit;
        this.kredit = debit;
        this.debit_usd = debit;
        this.kredit_usd = debit;
     }
 
-    public int getDebit() {
+    public BigDecimal getDebit() {
         return debit;
     }
-    public int getDebit_usd() {
+    public BigDecimal getDebit_usd() {
         return debit_usd;
     }
-    public int getDifference() {
+    public BigDecimal getDifference() {
         return difference;
     }
-    public int getDifference_usd() {
+    public BigDecimal getDifference_usd() {
         return difference_usd;
     }
-    public int getKredit() {
+    public BigDecimal getKredit() {
         return kredit;
     }
-    public int getKredit_usd() {
+    public BigDecimal getKredit_usd() {
         return kredit_usd;
     }
-    public int getSaldo_in_som() {
+    public BigDecimal getSaldo_in_som() {
         return saldo_in_som;
     }
-    public int getSaldo_in_usd() {
+    public BigDecimal getSaldo_in_usd() {
         return saldo_in_usd;
     }
-    public int getSaldo_out_som() {
+    public BigDecimal getSaldo_out_som() {
         return saldo_out_som;
     }
-    public int getSaldo_out_usd() {
+    public BigDecimal getSaldo_out_usd() {
         return saldo_out_usd;
     }
     public String getAdittional_score() {
@@ -89,7 +91,7 @@ public class ConsolidInfin {
     public String getCategory() {
         return category;
     }
-    public int getCode() {
+    public String getCode() {
         return code;
     }
     public String getName_of_score() {
@@ -102,40 +104,40 @@ public class ConsolidInfin {
     public void setCategory(String category) {
         this.category = category;
     }
-    public void setCode(int code) {
+    public void setCode(String code) {
         this.code = code;
     }
-    public void setDebit(int debit) {
+    public void setDebit(BigDecimal debit) {
         this.debit = debit;
     }
-    public void setDebit_usd(int debit_usd) {
+    public void setDebit_usd(BigDecimal debit_usd) {
         this.debit_usd = debit_usd;
     }
-    public void setDifference(int difference) {
+    public void setDifference(BigDecimal difference) {
         this.difference = difference;
     }
-    public void setDifference_usd(int difference_usd) {
+    public void setDifference_usd(BigDecimal difference_usd) {
         this.difference_usd = difference_usd;
     }
-    public void setKredit(int kredit) {
+    public void setKredit(BigDecimal kredit) {
         this.kredit = kredit;
     }
-    public void setKredit_usd(int kredit_usd) {
+    public void setKredit_usd(BigDecimal kredit_usd) {
         this.kredit_usd = kredit_usd;
     }
     public void setName_of_score(String name_of_score) {
         this.name_of_score = name_of_score;
     }
-    public void setSaldo_in_som(int saldo_in_som) {
+    public void setSaldo_in_som(BigDecimal saldo_in_som) {
         this.saldo_in_som = saldo_in_som;
     }
-    public void setSaldo_in_usd(int saldo_in_usd) {
+    public void setSaldo_in_usd(BigDecimal saldo_in_usd) {
         this.saldo_in_usd = saldo_in_usd;
     }
-    public void setSaldo_out_som(int saldo_out_som) {
+    public void setSaldo_out_som(BigDecimal saldo_out_som) {
         this.saldo_out_som = saldo_out_som;
     }
-    public void setSaldo_out_usd(int saldo_out_usd) {
+    public void setSaldo_out_usd(BigDecimal saldo_out_usd) {
         this.saldo_out_usd = saldo_out_usd;
     }
 
