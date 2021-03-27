@@ -40,7 +40,6 @@ public class ProgrammController {
     @FXML private TableColumn Number;
     @FXML private Button Import;
 
-
     private static final String CONTRACT_NUMBER_COLUMN_HEADER = "№ Договора";
     private static final String NUMBER_COLUMN_HEADER = "Договор";
     private static final String DEBIT_COLUMN_HEADER = "Дебит";
@@ -53,12 +52,22 @@ public class ProgrammController {
     @FXML void initialize(){
 
         Import.setOnAction(actionEvent -> {
-            String  a = "";
-            InsertFromExcel b = new InsertFromExcel();
-            b.InsertFromExcel(a);
-
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/ExcelImport.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent first = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(first));
+            stage.setMinWidth(600);
+            stage.setMinHeight(400);
+            stage.setMaxHeight(400);
+            stage.setMaxWidth(600);
+            stage.show();
         });
-
         excel.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/Done!.fxml"));

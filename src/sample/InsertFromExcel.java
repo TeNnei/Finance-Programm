@@ -15,8 +15,8 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 public class InsertFromExcel {
 
-       public void InsertFromExcel (String a){
-            String fileName="D:\\Finance-Programm\\Finance-Programm\\Main_Information.xls";
+    public void InsertFromExcel (String Link){
+            String fileName = Link;
             Vector dataHolder = read(fileName);
             saveToDatabase(dataHolder);
         }
@@ -49,13 +49,12 @@ public class InsertFromExcel {
             String coments = "";
             String som = "";
             String usd = "";
-            System.out.println(dataHolder);
 
-            Iterator iterator = dataHolder.iterator();
-            iterator.next(); // пропустит шапку
-            while(iterator.hasNext())
+            Iterator iterator =  dataHolder.iterator();
+            iterator.next();
+            while (iterator.hasNext())
             {
-                iterator.next();
+                // здесь мне нужно пропустить одну строку
                 List list = (List) iterator.next();
                 contract_number = list.get(0).toString();
                 contract = list.get(1).toString();
@@ -65,10 +64,10 @@ public class InsertFromExcel {
                 coments = list.get(5).toString();
                 som = list.get(6).toString();
                 usd = list.get(7).toString();
-
                int a  = (int) Double.parseDouble(date_of);
-
-
+               BigDecimal big1 = new BigDecimal(som);
+               BigDecimal big2 = new BigDecimal(usd);
+               // Но цикл проходит только половину строк...
                 try {
                     Class.forName("org.postgresql.Driver");
                     Connection con = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/postgres", "postgres", "987346521");
@@ -79,12 +78,10 @@ public class InsertFromExcel {
                     stmt.setString(4, credit);
                     stmt.setInt(5, a);
                     stmt.setString(6, coments);
-                    stmt.setBigDecimal(7, BigDecimal.valueOf(Double.parseDouble(som)));
-                    stmt.setBigDecimal(8, BigDecimal.valueOf(Double.parseDouble(usd)));
+                    stmt.setBigDecimal(7, big1);
+                    stmt.setBigDecimal(8, big2);
                     stmt.executeUpdate();
                     System.out.println("Data is inserted");
-                    stmt.close();
-                    con.close();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException e) {
