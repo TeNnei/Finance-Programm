@@ -8,6 +8,8 @@ import java.util.*;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.TreeCell;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
@@ -32,6 +34,7 @@ public class Total {
         expences.getColumns().add(treeTableColumn);
         expences.getColumns().add(treeTableColumn1);
         expences.getColumns().add(treeTableColumn2);
+
     }
 
    public void HashMapIn (){
@@ -46,15 +49,15 @@ public class Total {
                 String name_score = rs.getString(2);
                 String difference = rs.getString(3);
 
-                if (results.containsKey(category)) {
-                    results.get(category);
-                } else {
                     List<String> score_names = new ArrayList<>();
                     score_names.add(name_score);
                     score_names.add(difference);
                     results.put(category, score_names);
-                }
 
+                TreeItem infor = new TreeItem(new Expences(name_score, difference));
+                TreeItem finall = new TreeItem(new Expences(category));
+                finall.getChildren().add(infor);
+                expences.setRoot(finall);
             }
             Map.close();
         }catch (SQLException throwables) {

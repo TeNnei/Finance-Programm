@@ -14,6 +14,15 @@ public class Expences {
         this.total = total;
     }
 
+    public Expences(String name_score, String difference) {
+        this.code = name_score;
+        this.total = difference;
+    }
+
+    public Expences(String category) {
+        this.expens = category;
+    }
+
     public String getExpens() {
         return expens;
     }
