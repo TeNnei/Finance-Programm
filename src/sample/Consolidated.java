@@ -51,6 +51,7 @@ public class Consolidated {
     @FXML private DatePicker From;
     @FXML private DatePicker To;
     @FXML private Button back;
+    @FXML private Button total_button;
 
     private static final String CODE = "Код";
     private static final String CATEGORY = "Категория";
@@ -71,6 +72,23 @@ public class Consolidated {
 
     @FXML void initialize (){
         buildTable();
+
+        total_button.setOnAction(actionEvent -> {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/sample/TotalView.fxml"));
+            try {
+                loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Parent first = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(first));
+            stage.show();
+
+            Total a = new Total();
+            a.HashMapIn();
+        });
 
         back.setOnAction(actionEvent -> {
             FXMLLoader loader = new FXMLLoader();
@@ -283,7 +301,6 @@ public class Consolidated {
                         }
                 );
                 Code.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, Integer>("code"));
-
                 Category.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("category"));
                 Additional_Score.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("adittional_score"));
                 Score.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, String>("name_of_score"));

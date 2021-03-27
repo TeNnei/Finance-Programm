@@ -7,17 +7,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sample/ExcelImport.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/sample/ImportExcell.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Expences.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Total.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/TotalView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Main_Information.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Main_Information.xls" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/InsertFromExcel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/InsertFromExcel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ProgrammController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/InsertFromExcel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/InsertFromExcel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/ProgrammController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ProgrammController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ImportExcell.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ImportExcell.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Consolidated.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Consolidated.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Consolidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Consolidated.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/ImportExcell.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ImportExcell.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -407,11 +410,6 @@
           <url>file://$PROJECT_DIR$/src/FirstApp/Controller.java</url>
           <line>130</line>
           <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Main.java</url>
-          <line>8</line>
-          <option name="timeStamp" value="123" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Animation/Shake.java</url>
