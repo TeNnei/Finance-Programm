@@ -3,7 +3,6 @@ package sample;
 import javafx.scene.control.TreeItem;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 public class Expences extends TreeItem<Expences> {
     private String category;
@@ -16,9 +15,6 @@ public class Expences extends TreeItem<Expences> {
         this.name_of_score = code;
         this.difference = total;
     }
-
-    private List <Expences> inner;
-
     public Expences(String category) {
         this.category = category;
     }
