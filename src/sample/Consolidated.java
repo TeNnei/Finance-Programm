@@ -86,8 +86,6 @@ public class Consolidated {
             stage.setScene(new Scene(first));
             stage.show();
 
-            Total a = new Total();
-            a.HashMapIn();
         });
 
         back.setOnAction(actionEvent -> {

@@ -1,41 +1,39 @@
 package sample;
 
-import javafx.scene.control.TreeItem;
-
 import java.math.BigDecimal;
 
-public class Expences extends TreeItem<Expences> {
+public class Expences {
     private String category;
     private String name_of_score;
     private BigDecimal difference;
-
 
     public Expences(String expens, String code, BigDecimal total) {
         this.category = expens;
         this.name_of_score = code;
         this.difference = total;
     }
-    public Expences(String category) {
+    public Expences(String category, String name_of_score) {
         this.category = category;
+        this.name_of_score = name_of_score;
     }
 
 
-    public String getExpens() {
+    public String getCategory() {
         return category;
     }
-    public void setExpens(String expens) {
-        this.category = expens;
+    public void setCategory(String category) {
+        this.category = category;
     }
-    public String getCode() {
+    public String getName_of_score() {
         return name_of_score;
     }
-    public void setCode(String code) {
-        this.name_of_score = code;
+    public void setName_of_score(String name_of_score) {
+        this.name_of_score = name_of_score;
     }
-    public BigDecimal getTotal() {
+    public BigDecimal  getDifference() {
         return difference;
     }
-    public void setTotal(BigDecimal total) {
-        this.difference = total;
+    public void setDifference(BigDecimal  difference) {
+        this.difference = difference;
     }
 }

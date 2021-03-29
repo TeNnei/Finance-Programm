@@ -19,17 +19,17 @@ public class Total {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private TreeTableView<Expences> expences = new TreeTableView<Expences>();
-    TreeTableColumn<Expences, String> treeTableColumn1 = new TreeTableColumn<>("Категория");
-    TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Код");
-    TreeTableColumn<Expences, String> treeTableColumn3 = new TreeTableColumn<>("Итог");
+    TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Название счета");
+    TreeTableColumn<Expences, BigDecimal> treeTableColumn3 = new TreeTableColumn<>("Итог");
 
     @FXML
     void initialize() {
-        treeTableColumn1.setCellValueFactory(new TreeItemPropertyValueFactory<>("category"));
-        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_score"));
-        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("difference"));
+        HashMapIn();
+        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("category"));
+       treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
+       treeTableColumn3.setCellValueFactory(new TreeItemPropertyValueFactory<>("difference"));
 
-        expences.getColumns().add(treeTableColumn1);
+
         expences.getColumns().add(treeTableColumn2);
         expences.getColumns().add(treeTableColumn3);
     }
@@ -45,13 +45,15 @@ public class Total {
                 String category = rs.getString(1);
                 String name_score = rs.getString(2);
                 String difference = rs.getString(3);
+
                 BigDecimal total = new BigDecimal(difference);
+
                 if (results.containsKey(category)) {
                     Map<Expences, List<Expences>> innerMap = results.get(category);
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, total));
                 } else {
                     Map<Expences, List<Expences>> innerMap = new HashMap<>();
-                    innerMap.put(new Expences(category, "", BigDecimal.ZERO), new ArrayList<>());
+                    innerMap.put(new Expences(category, category, BigDecimal.TEN), new ArrayList<>());
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, total));
                     results.put(category, innerMap);
                 }
@@ -59,9 +61,8 @@ public class Total {
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-       TreeItem<Expences> rootItem = new TreeItem(new Expences("Данные", "---", BigDecimal.ZERO));
+       TreeItem<Expences> rootItem = new TreeItem(new Expences("Данные", "Данные", BigDecimal.ZERO));
        results.entrySet().forEach(entry -> {
-           String category = entry.getKey();
            Map<Expences, List<Expences>> innerMap = entry.getValue();
            TreeItem<Expences> categoryItem;
            categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
@@ -71,6 +72,6 @@ public class Total {
                categoryItem.getChildren().add(scoreItem);
            });
        });
-       System.out.println(results);
+       expences.setRoot(rootItem);
     }
 }
