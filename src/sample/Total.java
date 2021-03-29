@@ -1,15 +1,12 @@
 package sample;
+import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.TreeCell;
-import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
@@ -28,18 +25,16 @@ public class Total {
     @FXML
     void initialize() {
         treeTableColumn.setCellValueFactory(new TreeItemPropertyValueFactory<>("expens"));
-        treeTableColumn1.setCellValueFactory(new TreeItemPropertyValueFactory<>("code"));
         treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("total"));
 
         expences.getColumns().add(treeTableColumn);
-        expences.getColumns().add(treeTableColumn1);
         expences.getColumns().add(treeTableColumn2);
 
     }
 
    public void HashMapIn (){
         String MapInf = "SELECT category, name_score, defference FROM consolid";
-         Map<String, List<String>> results = new HashMap<>();
+       Map<String, Map<Expences, List<Expences>>> results = new HashMap<>();
         try {
             Connection Map = DatabaseHandler.getDbConnection();
             PreparedStatement FirstMap = Map.prepareStatement(MapInf);
@@ -48,21 +43,24 @@ public class Total {
                 String category = rs.getString(1);
                 String name_score = rs.getString(2);
                 String difference = rs.getString(3);
+                BigDecimal total = new BigDecimal(difference);
 
-                    List<String> score_names = new ArrayList<>();
+                Expences infFromMap = new Expences(category, name_score, total);
+
+                if(results.containsKey(category)){
+                    results.get(category).put(name_score);
+                    results.get(category).put(difference);
+                }else {
+                    List <String> score_names = new ArrayList<>();
                     score_names.add(name_score);
                     score_names.add(difference);
                     results.put(category, score_names);
+                }
 
-                TreeItem infor = new TreeItem(new Expences(name_score, difference));
-                TreeItem finall = new TreeItem(new Expences(category));
-                finall.getChildren().add(infor);
-                expences.setRoot(finall);
             }
-            Map.close();
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        System.out.println(results);
+       System.out.println(results);
     }
 }

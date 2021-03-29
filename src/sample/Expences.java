@@ -1,27 +1,28 @@
 package sample;
 
-public class Expences {
-    private String expens = null;
-    private String code = null;
-    private String total =null;
+import javafx.scene.control.TreeItem;
 
-    public Expences() {
-    }
+import java.math.BigDecimal;
+import java.util.List;
 
-    public Expences(String expens, String code, String total) {
+public class Expences extends TreeItem<Expences> {
+    private String expens;
+    private String code;
+    private BigDecimal total;
+
+
+    public Expences(String expens, String code, BigDecimal total) {
         this.expens = expens;
         this.code = code;
         this.total = total;
     }
 
-    public Expences(String name_score, String difference) {
-        this.code = name_score;
-        this.total = difference;
-    }
+    private List <Expences> inner;
 
     public Expences(String category) {
         this.expens = category;
     }
+
 
     public String getExpens() {
         return expens;
@@ -35,10 +36,10 @@ public class Expences {
     public void setCode(String code) {
         this.code = code;
     }
-    public String getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
-    public void setTotal(String total) {
+    public void setTotal(BigDecimal total) {
         this.total = total;
     }
 }

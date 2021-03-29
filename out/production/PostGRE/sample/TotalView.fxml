@@ -13,6 +13,9 @@
     <RowConstraints minHeight="10.0" prefHeight="720.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TreeTableView fx:id="expences" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="831.0" prefWidth="1187.0" />
+      <TreeTableView fx:id="expences" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="831.0" prefWidth="1187.0">
+         <columnResizePolicy>
+            <TreeTableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy></TreeTableView>
    </children>
 </GridPane>
