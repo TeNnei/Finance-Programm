@@ -6,40 +6,40 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class Expences extends TreeItem<Expences> {
-    private String expens;
-    private String code;
-    private BigDecimal total;
+    private String category;
+    private String name_of_score;
+    private BigDecimal difference;
 
 
     public Expences(String expens, String code, BigDecimal total) {
-        this.expens = expens;
-        this.code = code;
-        this.total = total;
+        this.category = expens;
+        this.name_of_score = code;
+        this.difference = total;
     }
 
     private List <Expences> inner;
 
     public Expences(String category) {
-        this.expens = category;
+        this.category = category;
     }
 
 
     public String getExpens() {
-        return expens;
+        return category;
     }
     public void setExpens(String expens) {
-        this.expens = expens;
+        this.category = expens;
     }
     public String getCode() {
-        return code;
+        return name_of_score;
     }
     public void setCode(String code) {
-        this.code = code;
+        this.name_of_score = code;
     }
     public BigDecimal getTotal() {
-        return total;
+        return difference;
     }
     public void setTotal(BigDecimal total) {
-        this.total = total;
+        this.difference = total;
     }
 }

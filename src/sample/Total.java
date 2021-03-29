@@ -1,15 +1,19 @@
 package sample;
+import javafx.fxml.FXML;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+
 import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
-import javafx.fxml.FXML;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.control.TreeTableView;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 
 public class Total {
@@ -18,7 +22,6 @@ public class Total {
     @FXML
     private TreeTableView<Expences> expences = new TreeTableView<Expences>();
     @FXML TreeTableColumn<Expences, String> treeTableColumn = new TreeTableColumn<>("Имя счета");
-    @FXML TreeTableColumn<Expences, String> treeTableColumn1 = new TreeTableColumn<>("Код");
     @FXML TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Итог");
 
 
@@ -47,15 +50,6 @@ public class Total {
 
                 Expences infFromMap = new Expences(category, name_score, total);
 
-                if(results.containsKey(category)){
-                    results.get(category).put(name_score);
-                    results.get(category).put(difference);
-                }else {
-                    List <String> score_names = new ArrayList<>();
-                    score_names.add(name_score);
-                    score_names.add(difference);
-                    results.put(category, score_names);
-                }
 
             }
         }catch (SQLException throwables) {
