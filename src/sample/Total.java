@@ -7,6 +7,7 @@ import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,16 +20,26 @@ public class Total {
     @FXML private ResourceBundle resources;
     @FXML private URL location;
     @FXML private TreeTableView<Expences> expences = new TreeTableView<Expences>();
+    @FXML private TreeTableView<ExpencesUSD> expences_usd = new TreeTableView<ExpencesUSD>();
     TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Название счета");
     TreeTableColumn<Expences, BigDecimal> treeTableColumn3 = new TreeTableColumn<>("Итог");
+
+    TreeTableColumn<ExpencesUSD, String> treeTableColumn4 = new TreeTableColumn<>("Название счета");
+    TreeTableColumn<ExpencesUSD, BigDecimal> treeTableColumn5 = new TreeTableColumn<>("Итог USD");
 
     @FXML
     void initialize() {
         HashMapIn();
-        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("category"));
+        HashMapInUsd();
        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
        treeTableColumn3.setCellValueFactory(new TreeItemPropertyValueFactory<>("difference"));
 
+
+       treeTableColumn4.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
+       treeTableColumn5.setCellValueFactory(new TreeItemPropertyValueFactory<>("differenceUsd"));
+
+       expences_usd.getColumns().add(treeTableColumn4);
+       expences_usd.getColumns().add(treeTableColumn5);
 
         expences.getColumns().add(treeTableColumn2);
         expences.getColumns().add(treeTableColumn3);
@@ -37,6 +48,9 @@ public class Total {
    public void HashMapIn (){
         String MapInf = "SELECT category, name_score, defference FROM consolid";
        Map<String, Map<Expences, List<Expences>>> results = new HashMap<>();
+       MathContext mc = new MathContext(10);
+       BigDecimal amount = BigDecimal.ZERO;
+       BigDecimal total = BigDecimal.ZERO;
         try {
             Connection Map = DatabaseHandler.getDbConnection();
             PreparedStatement FirstMap = Map.prepareStatement(MapInf);
@@ -44,24 +58,27 @@ public class Total {
             while (rs.next()) {
                 String category = rs.getString(1);
                 String name_score = rs.getString(2);
-                String difference = rs.getString(3);
-
-                BigDecimal total = new BigDecimal(difference);
+                BigDecimal difference = new BigDecimal(rs.getString(3));
+                amount = amount.add(difference, mc);
 
                 if (results.containsKey(category)) {
                     Map<Expences, List<Expences>> innerMap = results.get(category);
-                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, total));
-                } else {
+                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, difference));
+                }
+                else {
                     Map<Expences, List<Expences>> innerMap = new HashMap<>();
-                    innerMap.put(new Expences(category, category, BigDecimal.TEN), new ArrayList<>());
-                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, total));
+                    innerMap.put(new Expences(category, category, total), new ArrayList<>());
+                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, BigDecimal.ZERO));
                     results.put(category, innerMap);
                 }
+                Map<Expences, List<Expences>> inf = results.get(category);
+                inf.get(category);
+                System.out.println(inf.toString());
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-       TreeItem<Expences> rootItem = new TreeItem(new Expences("Данные", "Данные", BigDecimal.ZERO));
+       TreeItem<Expences> rootItem = new TreeItem(new Expences(" ", "Данные", amount));
        results.entrySet().forEach(entry -> {
            Map<Expences, List<Expences>> innerMap = entry.getValue();
            TreeItem<Expences> categoryItem;
@@ -73,5 +90,51 @@ public class Total {
            });
        });
        expences.setRoot(rootItem);
+    }
+
+    public void HashMapInUsd(){
+        String MapInf = "SELECT category, name_score, difference_usd FROM consolid";
+        Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> results = new HashMap<>();
+        MathContext mc = new MathContext(10);
+        BigDecimal amount = BigDecimal.ZERO;
+        try {
+            Connection Map = DatabaseHandler.getDbConnection();
+            PreparedStatement FirstMap = Map.prepareStatement(MapInf);
+            ResultSet rs = FirstMap.executeQuery();
+            while (rs.next()) {
+                String category = rs.getString(1);
+                String name_score = rs.getString(2);
+                String differenceUsd = rs.getString(3);
+                BigDecimal total = new BigDecimal(differenceUsd);
+                amount = amount.add(total, mc);
+
+                if (results.containsKey(category)) {
+                    Map<ExpencesUSD, List<ExpencesUSD>> innerMap = results.get(category);
+                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, name_score, total));
+                } else {
+                    Map<ExpencesUSD, List<ExpencesUSD>> innerMap = new HashMap<>();
+                    innerMap.put(new ExpencesUSD(category, category, BigDecimal.TEN), new ArrayList<>());
+                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, name_score, total));
+                    results.put(category, innerMap);
+                }
+
+
+
+            }
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        TreeItem<ExpencesUSD> rootItem = new TreeItem(new ExpencesUSD("Данные USD", "Данные USD", amount));
+        results.entrySet().forEach(entry -> {
+            Map<ExpencesUSD, List<ExpencesUSD>> innerMap = entry.getValue();
+            TreeItem<ExpencesUSD> categoryItem;
+            categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
+            rootItem.getChildren().add(categoryItem);
+            innerMap.entrySet().iterator().next().getValue().forEach(expenceInList -> {
+                TreeItem<ExpencesUSD> scoreItem = new TreeItem(expenceInList);
+                categoryItem.getChildren().add(scoreItem);
+            });
+        });
+        expences_usd.setRoot(rootItem);
     }
 }

@@ -1,11 +1,25 @@
 package sample;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Expences {
     private String category;
     private String name_of_score;
     private BigDecimal difference;
+    private BigDecimal total;
+    private List<Expences> entries = new ArrayList<>();
+
+    public Expences addEntry (Expences expence) {
+        this.entries.add(expence);
+        this.total = total.add(expence.getTotal());
+        return this;
+    }
+
+    public Expences (BigDecimal amount){
+        this.difference = amount;
+    }
 
     public Expences(String expens, String code, BigDecimal total) {
         this.category = expens;
@@ -17,6 +31,13 @@ public class Expences {
         this.name_of_score = name_of_score;
     }
 
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public List<Expences> getEntries() {
+        return entries;
+    }
 
     public String getCategory() {
         return category;

@@ -85,7 +85,6 @@ public class Consolidated {
             Stage stage = new Stage();
             stage.setScene(new Scene(first));
             stage.show();
-
         });
 
         back.setOnAction(actionEvent -> {
@@ -119,47 +118,33 @@ public class Consolidated {
             HSSFRow row1;
             HSSFCell cell;
 
-            row1 = spreadsheet.createRow(0); // Вот здесь начинается прописываться шапка
-
+            row1 = spreadsheet.createRow(0);
             cell = row1.createCell(0, CellType.STRING);
             cell.setCellValue(CODE);
-
             cell = row1.createCell(1,CellType.STRING);
             cell.setCellValue(CATEGORY);
-
             cell = row1.createCell(2, CellType.STRING);
             cell.setCellValue(ADDITIONAL_SCORE);
-
             cell = row1.createCell(3, CellType.STRING);
             cell.setCellValue(NAME_OF_SCORE);
-
             cell = row1.createCell(4, CellType.NUMERIC);
             cell.setCellValue(SALDO_IN_SOM);
-
             cell = row1.createCell(5, CellType.NUMERIC);
             cell.setCellValue(DEBIT);
-
             cell = row1.createCell(6, CellType.NUMERIC);
             cell.setCellValue(CREDIT);
-
             cell = row1.createCell(7, CellType.NUMERIC);
             cell.setCellValue(SALDO_OUT_SOM);
-
             cell = row1.createCell(8, CellType.NUMERIC);
             cell.setCellValue(DIFFERENCE);
-
             cell = row1.createCell(9, CellType.NUMERIC);
             cell.setCellValue(SALDO_IN_USD);
-
             cell = row1.createCell(10, CellType.NUMERIC);
             cell.setCellValue(DEBIT_USD);
-
             cell = row1.createCell(11, CellType.NUMERIC);
             cell.setCellValue(CREDIT_USD);
-
             cell = row1.createCell(12, CellType.NUMERIC);
             cell.setCellValue(SALDO_OUT_USD);
-
             cell = row1.createCell(13, CellType.NUMERIC);
             cell.setCellValue(DIFFERENCE_USD);
 
@@ -204,7 +189,6 @@ public class Consolidated {
         });
     }
 
-
     private void buildTable (){
         Connection table;
         ResultSet rs;
@@ -228,7 +212,6 @@ public class Consolidated {
                 BigDecimal eleven = rs.getBigDecimal("credit_usd");
                 BigDecimal twelve = rs.getBigDecimal("saldo_out_usd");
                 BigDecimal thirteen = rs.getBigDecimal("difference_usd");
-                // MainTableInf считайте тотже самый класс что и ProgrammData просто я путаться начал и создал отдельный класс
                 ConsolidInfin ConsolidInfTable = new ConsolidInfin(first, second, second1, third, fouth, fifth, sixth, seventh, eight,
                         nine, ten, eleven, twelve, thirteen);
 

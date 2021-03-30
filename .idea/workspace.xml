@@ -10,20 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/ExpencesUSD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main_Information.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Main_Information.xls" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Consolidated.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Expences.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Expences.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/TotalView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/TotalView.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Consolidated.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Consolidated.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Expences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Expences.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Total.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Total.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/TotalView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/TotalView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,8 +81,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="XHTML File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -409,20 +409,21 @@
           <line>17</line>
           <option name="timeStamp" value="110" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Total.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="180" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.lang.String" memberName="hash" />
-        <PinnedItemInfo parentTag="sample.Expences" memberName="difference" />
-        <PinnedItemInfo parentTag="java.util.HashMap$Node" memberName="value" />
+        <PinnedItemInfo parentTag="javafx.scene.control.TableColumn" memberName="tableView" />
+        <PinnedItemInfo parentTag="java.math.MathContext" memberName="roundingMode" />
+        <PinnedItemInfo parentTag="java.lang.String" memberName="coder" />
       </pinned-members>
     </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="FirstMap" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
