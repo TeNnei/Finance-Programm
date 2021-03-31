@@ -191,14 +191,14 @@ public class DatabaseHandler {
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateCredit (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.KREDIT + "= (SELECT SUM (credit_som) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.KREDIT + "= COALESCE((SELECT SUM (credit_som) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateSaldoOutSom (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_SOM + "= (SELECT SUM (saldo_out_som) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_SOM + "= COALESCE((SELECT SUM (saldo_out_som) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());
@@ -211,21 +211,21 @@ public class DatabaseHandler {
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateDebitUsd (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.DEBET_USD + "= (SELECT SUM (debit_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.DEBET_USD + "= COALESCE((SELECT SUM (debit_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateCreditUsd (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.KREDIT_USD + "= (SELECT SUM (credit_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.KREDIT_USD + "= COALESCE((SELECT SUM (credit_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateSaldoOutUsd (SubTotalGetterSetter dateinf) throws SQLException {
-        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_USD + " = (SELECT SUM (saldo_out_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code);";
+        String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_OUT_USD + " = COALESCE((SELECT SUM (saldo_out_usd) FROM summary_subtotal WHERE today >= ? AND today <= ? AND code = consolid.code GROUP BY code), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
         dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.setDate(2, dateinf.getTodayTo());

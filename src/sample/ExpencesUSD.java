@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 public class ExpencesUSD {
     private String category;
     private String name_of_score;
-    private BigDecimal differenceUsd;
+    private BigDecimal totalUsd;
 
 
     public ExpencesUSD(String category, String name_of_score, BigDecimal differenceUsd) {
         this.category = category;
         this.name_of_score = name_of_score;
-        this.differenceUsd = differenceUsd;
+        this.totalUsd = differenceUsd;
     }
 
     public String getCategory() {
@@ -30,11 +30,11 @@ public class ExpencesUSD {
         this.name_of_score = name_of_score;
     }
 
-    public BigDecimal getDifferenceUsd() {
-        return differenceUsd;
+    public BigDecimal getTotalUsd() {
+        return totalUsd;
     }
 
-    public void setDifferenceUsd(BigDecimal differenceUsd) {
-        this.differenceUsd = differenceUsd;
+    public void setTotalUsd(BigDecimal differenceUsd) {
+        this.totalUsd = differenceUsd;
     }
 }

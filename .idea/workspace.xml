@@ -10,11 +10,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sample/TotalGlobalClass.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Expences.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Expences.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ExpencesUSD.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ExpencesUSD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DatabaseHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Expences.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Expences.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/ExpencesUSD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ExpencesUSD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Total.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Total.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/TotalView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/TotalView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -395,20 +400,14 @@
           <properties class="java.lang.NoClassDefFoundError" package="java.lang" />
           <option name="timeStamp" value="147" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.IllegalStateException" package="java.lang" />
+          <option name="timeStamp" value="177" />
+        </breakpoint>
         <line-breakpoint type="java-line">
           <url>jar://$PROJECT_DIR$/../../JavaFX/javafx-sdk-11.0.2/lib/javafx.graphics.jar!/javafx/scene/PropertyHelper.class</url>
           <line>17</line>
           <option name="timeStamp" value="110" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Expences.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="152" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/Total.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="168" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

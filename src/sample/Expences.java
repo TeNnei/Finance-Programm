@@ -7,31 +7,24 @@ import java.util.List;
 public class Expences {
     private String category;
     private String name_of_score;
-    private BigDecimal difference;
-    private BigDecimal total = BigDecimal.ZERO;
+    private BigDecimal total;
     private List<Expences> entries = new ArrayList<>();
 
     public Expences() {
     }
 
-    public Expences addEntry (BigDecimal expence) {
-//        this.entries.add(expence);
-        this.total = total.add(expence);
-        return this;
-    }
-
-    public Expences (BigDecimal amount){
-        this.difference = amount;
-    }
-
     public Expences(String expens, String code, BigDecimal total) {
         this.category = expens;
         this.name_of_score = code;
-        this.difference = total;
+        this.total = total;
     }
     public Expences(String category, String name_of_score) {
         this.category = category;
         this.name_of_score = name_of_score;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
     }
 
     public BigDecimal getTotal() {
@@ -53,11 +46,5 @@ public class Expences {
     }
     public void setName_of_score(String name_of_score) {
         this.name_of_score = name_of_score;
-    }
-    public BigDecimal  getDifference() {
-        return difference;
-    }
-    public void setDifference(BigDecimal  difference) {
-        this.difference = difference;
     }
 }
