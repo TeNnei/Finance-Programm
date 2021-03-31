@@ -68,11 +68,10 @@ public class Total {
                 if (results.containsKey(category)) {
                     Map<Expences, List<Expences>> innerMap = results.get(category);
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, difference));
-                    Expences first = innerMap.entrySet().iterator().next().getKey();
                 }
                 else {
                     Map<Expences, List<Expences>> innerMap = new HashMap<>();
-                    innerMap.put(new Expences(category, category, total), new ArrayList<>());
+                    innerMap.put(new Expences(category, category, BigDecimal.ZERO), new ArrayList<>());
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, BigDecimal.ZERO));
                     results.put(category, innerMap);
                 }
