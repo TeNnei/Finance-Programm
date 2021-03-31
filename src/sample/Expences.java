@@ -8,12 +8,15 @@ public class Expences {
     private String category;
     private String name_of_score;
     private BigDecimal difference;
-    private BigDecimal total;
+    private BigDecimal total = BigDecimal.ZERO;
     private List<Expences> entries = new ArrayList<>();
 
-    public Expences addEntry (Expences expence) {
-        this.entries.add(expence);
-        this.total = total.add(expence.getTotal());
+    public Expences() {
+    }
+
+    public Expences addEntry (BigDecimal expence) {
+//        this.entries.add(expence);
+        this.total = total.add(expence);
         return this;
     }
 

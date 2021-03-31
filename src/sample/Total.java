@@ -31,6 +31,7 @@ public class Total {
     void initialize() {
         HashMapIn();
         HashMapInUsd();
+        Ui();
        treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
        treeTableColumn3.setCellValueFactory(new TreeItemPropertyValueFactory<>("difference"));
 
@@ -45,12 +46,15 @@ public class Total {
         expences.getColumns().add(treeTableColumn3);
     }
 
+    Map<String, Map<Expences, List<Expences>>> results;
+    BigDecimal amount = BigDecimal.ZERO;
    public void HashMapIn (){
         String MapInf = "SELECT category, name_score, defference FROM consolid";
-       Map<String, Map<Expences, List<Expences>>> results = new HashMap<>();
+        results = new HashMap<>();
        MathContext mc = new MathContext(10);
-       BigDecimal amount = BigDecimal.ZERO;
        BigDecimal total = BigDecimal.ZERO;
+       Expences a = new Expences();
+
         try {
             Connection Map = DatabaseHandler.getDbConnection();
             PreparedStatement FirstMap = Map.prepareStatement(MapInf);
@@ -59,11 +63,12 @@ public class Total {
                 String category = rs.getString(1);
                 String name_score = rs.getString(2);
                 BigDecimal difference = new BigDecimal(rs.getString(3));
-                amount = amount.add(difference, mc);
 
+                amount = amount.add(difference, mc);
                 if (results.containsKey(category)) {
                     Map<Expences, List<Expences>> innerMap = results.get(category);
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, difference));
+                    Expences first = innerMap.entrySet().iterator().next().getKey();
                 }
                 else {
                     Map<Expences, List<Expences>> innerMap = new HashMap<>();
@@ -71,9 +76,11 @@ public class Total {
                     innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, BigDecimal.ZERO));
                     results.put(category, innerMap);
                 }
-                Map<Expences, List<Expences>> inf = results.get(category);
-                inf.get(category);
-                System.out.println(inf.toString());
+                Map<Expences, List<Expences>> summ = results.entrySet().iterator().next().getValue();
+                List<Expences> totalsumm = summ.entrySet().iterator().next().getValue();
+                BigDecimal total2 = totalsumm.iterator().next().getDifference();
+                a.addEntry(total2);
+                total = total.add(a.getTotal());
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -90,6 +97,10 @@ public class Total {
            });
        });
        expences.setRoot(rootItem);
+
+    }
+    public  void Ui(){
+
     }
 
     public void HashMapInUsd(){
@@ -117,8 +128,6 @@ public class Total {
                     innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, name_score, total));
                     results.put(category, innerMap);
                 }
-
-
 
             }
         }catch (SQLException throwables) {
