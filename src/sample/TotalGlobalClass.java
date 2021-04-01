@@ -3,6 +3,7 @@ package sample;
 import java.math.BigDecimal;
 
 public class TotalGlobalClass {
+    private String category;
     private String name_of_score;
     private BigDecimal saldo_in_som;
     private BigDecimal saldo_out_som;
@@ -14,7 +15,7 @@ public class TotalGlobalClass {
     public TotalGlobalClass() {
     }
 
-    public TotalGlobalClass(String name_of_score, BigDecimal saldo_in_som, BigDecimal saldo_out_som, BigDecimal differenceSom, BigDecimal saldo_in_usd, BigDecimal saldo_out_usd, BigDecimal differenceUsd) {
+    public TotalGlobalClass(String category, String name_of_score, BigDecimal saldo_in_som, BigDecimal saldo_out_som, BigDecimal differenceSom, BigDecimal saldo_in_usd, BigDecimal saldo_out_usd, BigDecimal differenceUsd) {
         this.name_of_score = name_of_score;
         this.saldo_in_som = saldo_in_som;
         this.saldo_out_som = saldo_out_som;

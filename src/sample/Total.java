@@ -21,8 +21,7 @@ public class Total {
     @FXML private URL location;
     @FXML private TreeTableView<Expences> expences = new TreeTableView<Expences>();
     @FXML private TreeTableView<ExpencesUSD> expences_usd = new TreeTableView<ExpencesUSD>();
-
-    @FXML private TreeTableView<?> TotalGlobalView = new TreeTableView<TotalGlobalClass>();
+    @FXML private TreeTableView<TotalGlobalClass> TotalGlobalView = new TreeTableView<TotalGlobalClass>();
     TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Название счета");
     TreeTableColumn<Expences, BigDecimal> treeTableColumn3 = new TreeTableColumn<>("Итог");
 
@@ -50,6 +49,7 @@ public class Total {
 
     expences.getColumns().add(treeTableColumn2);
     expences.getColumns().add(treeTableColumn3);
+
   }
 
     public void HashMapIn (){
@@ -124,7 +124,6 @@ public class Total {
                 }
                 Map.Entry<ExpencesUSD, List<ExpencesUSD>> innerMap = resultsUSD.get(category).entrySet().iterator().next();
                 innerMap.getKey().setTotalUsd(innerMap.getKey().getTotalUsd().add(total));
-
             }
         }catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -152,11 +151,42 @@ public class Total {
             Connection totalView = DatabaseHandler.getDbConnection();
             PreparedStatement Map = totalView.prepareStatement(informationFromBD);
             ResultSet rs = Map.executeQuery();
-
-
+            while ((rs.next())){
+                String category = rs.getString(1);
+                String name_score = rs.getString(2);
+                BigDecimal saldo_in_som = new BigDecimal(rs.getString(3));
+                BigDecimal saldo_out_som = new BigDecimal(rs.getString(4));
+                BigDecimal difference = new BigDecimal(rs.getString(5));
+                BigDecimal sald_in_usd = new BigDecimal(rs.getString(6));
+                BigDecimal saldo_out_usd = new BigDecimal(rs.getString(7));
+                BigDecimal difference_usd = new BigDecimal(rs.getString(8));
+                if (TotalInf.containsKey(category)){
+                    Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = TotalInf.get(category);
+                    innerMap.entrySet().iterator().next().getValue().add(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
+                            sald_in_usd, saldo_out_usd, difference_usd));
+                }else{
+                    Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = new HashMap<>();
+                    innerMap.put(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
+                            sald_in_usd, saldo_out_usd, difference_usd), new ArrayList<>());
+                    innerMap.entrySet().iterator().next().getValue().add(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
+                            sald_in_usd, saldo_out_usd, difference_usd));
+                    TotalInf.put(category, innerMap);
+                }
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
+        TreeItem<TotalGlobalClass> rootItem = new TreeItem(new TotalGlobalClass());
+        TotalInf.entrySet().forEach(entry -> {
+            Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = entry.getValue();
+            TreeItem<TotalGlobalClass> categoryItem;
+            categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
+            rootItem.getChildren().add(categoryItem);
+            innerMap.entrySet().iterator().next().getValue().forEach(expenceInList -> {
+                TreeItem<TotalGlobalClass> scoreItem = new TreeItem(expenceInList);
+                categoryItem.getChildren().add(scoreItem);
+            });
+        });
+        TotalGlobalView.setRoot(rootItem);
     }
 }

@@ -187,7 +187,7 @@ public class DatabaseHandler {
     public void consolidinfDateSaldoInSom (SubTotalGetterSetter dateinf) throws SQLException {
         String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_SOM + "= COALESCE((SELECT saldo_out_som FROM summary_subtotal WHERE code = consolid.code AND today < ? ORDER BY today DESC LIMIT 1), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
-        dateinfTable.setDate(1, dateinf.getTodayTo());
+        dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateCredit (SubTotalGetterSetter dateinf) throws SQLException {
@@ -207,7 +207,7 @@ public class DatabaseHandler {
     public void consolidinfDateSaldoInUsd (SubTotalGetterSetter dateinf) throws SQLException {
         String dateInfConsolid = "UPDATE consolid SET " +ConsolidInf.SALDO_IN_USD + "= COALESCE((SELECT saldo_out_usd FROM summary_subtotal WHERE code = consolid.code AND today < ? ORDER BY today DESC LIMIT 1), 0);";
         PreparedStatement dateinfTable = getDbConnection().prepareStatement(dateInfConsolid);
-        dateinfTable.setDate(1, dateinf.getTodayTo());
+        dateinfTable.setDate(1, dateinf.getTodayFrom());
         dateinfTable.executeUpdate();
     }
     public void consolidinfDateDebitUsd (SubTotalGetterSetter dateinf) throws SQLException {
