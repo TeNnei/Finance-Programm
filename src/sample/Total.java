@@ -1,12 +1,12 @@
 package sample;
 
-import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.net.URL;
@@ -23,29 +23,27 @@ public class Total {
     @FXML private TreeTableView<Expences> expences = new TreeTableView<Expences>();
     @FXML private TreeTableView<ExpencesUSD> expences_usd = new TreeTableView<ExpencesUSD>();
     @FXML private TreeTableView<TotalGlobalClass> TotalGlobalView = new TreeTableView<TotalGlobalClass>();
-    TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("Название счета");
+    TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("SOM");
     TreeTableColumn<Expences, BigDecimal> treeTableColumn3 = new TreeTableColumn<>("Итог");
 
-    TreeTableColumn<ExpencesUSD, String> treeTableColumn4 = new TreeTableColumn<>("Название счета");
+    TreeTableColumn<ExpencesUSD, String> treeTableColumn4 = new TreeTableColumn<>("USD");
     TreeTableColumn<ExpencesUSD, BigDecimal> treeTableColumn5 = new TreeTableColumn<>("Итог USD");
 
     Map<String, Map<Expences, List<Expences>>> results;
     Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> resultsUSD;
     Map<String, Map<TotalGlobalClass, List<TotalGlobalClass>>> TotalInf;
     BigDecimal amount = BigDecimal.ZERO;
-    Gson gson = new Gson();
 
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException {
     HashMapIn();
     HashMapInUsd();
 
-
-    String json = gson.toJson(results);
-    JSONObject Json = new JSONObject ();
-    Json.putAll(json);
-
+//        try (Writer writer = new FileWriter("Output.json")) {
+//            Gson gson = new GsonBuilder().create();
+//            gson.toJson(results, writer);
+//        }
 
     treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
     treeTableColumn3.setCellValueFactory(new TreeItemPropertyValueFactory<>("total"));
@@ -175,8 +173,8 @@ public class Total {
                             sald_in_usd, saldo_out_usd, difference_usd));
                 }else{
                     Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = new HashMap<>();
-                    innerMap.put(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
-                            sald_in_usd, saldo_out_usd, difference_usd), new ArrayList<>());
+                    innerMap.put(new TotalGlobalClass(category, name_score, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+                            BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO), new ArrayList<>());
                     innerMap.entrySet().iterator().next().getValue().add(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
                             sald_in_usd, saldo_out_usd, difference_usd));
                     TotalInf.put(category, innerMap);

@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="org.json4s:json4s-native_2.12:3.5.1" type="repository">
+    <properties maven-id="org.json4s:json4s-native_2.12:3.5.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/json4s-native_2.12-3.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/scala-library-2.12.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/json4s-core_2.12-3.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/json4s-ast_2.12-3.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/json4s-scalap_2.12-3.5.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/paranamer-2.8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../Maven/apache-maven-3.6.3/lib/scala-xml_2.12-1.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
