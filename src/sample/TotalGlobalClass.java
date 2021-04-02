@@ -15,7 +15,15 @@ public class TotalGlobalClass {
     public TotalGlobalClass() {
     }
 
-    public TotalGlobalClass(String category, String name_of_score, BigDecimal saldo_in_som, BigDecimal saldo_out_som, BigDecimal differenceSom, BigDecimal saldo_in_usd, BigDecimal saldo_out_usd, BigDecimal differenceUsd) {
+    public TotalGlobalClass(String category,
+                            String name_of_score,
+                            BigDecimal saldo_in_som,
+                            BigDecimal saldo_out_som,
+                            BigDecimal differenceSom,
+                            BigDecimal saldo_in_usd,
+                            BigDecimal saldo_out_usd, BigDecimal differenceUsd) {
+
+        this.category = category;
         this.name_of_score = name_of_score;
         this.saldo_in_som = saldo_in_som;
         this.saldo_out_som = saldo_out_som;
@@ -25,6 +33,7 @@ public class TotalGlobalClass {
         this.differenceUsd = differenceUsd;
     }
 
+    public String getCategory(){ return category;}
     public String getName_of_score() {
         return name_of_score;
     }
@@ -47,6 +56,7 @@ public class TotalGlobalClass {
         return differenceUsd;
     }
 
+    public void setCategory(String category){this.category = category;}
     public void setName_of_score(String name_of_score) {
         this.name_of_score = name_of_score;
     }

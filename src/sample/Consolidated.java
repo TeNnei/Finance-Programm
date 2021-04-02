@@ -317,5 +317,11 @@ public class Consolidated {
         dateSet.consolidinfDateSaldoInUsd(a);
         dateSet.consolidinfDateDebitUsd(a);
         dateSet.consolidinfDateCreditUsd(a);
+        dateSet.categorySETOUTSOM();
+        dateSet.categorySETOUTSOM();
+        dateSet.categorySETInUSD();
+        dateSet.categorySETOUTUSD();
+        dateSet.categoryNOTCHAGES();
+        dateSet.categoryNOTCHAGESUSD();
     }
 }

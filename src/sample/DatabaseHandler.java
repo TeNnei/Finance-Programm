@@ -187,5 +187,41 @@ public class DatabaseHandler {
         dateinfTable.setDate(2, dateinf.getTodayTo());
         dateinfTable.executeUpdate();
     }
+    public void categorySETInSOM () throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'ПРИТОКИ' WHERE defference > 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
+    public void categorySETInUSD () throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'ПРИТОКИ' WHERE defference > 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
+    public void categorySETOUTSOM () throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'ОТТОКИ' WHERE defference < 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
+    public void categorySETOUTUSD() throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'ОТТОКИ' WHERE defference < 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
+    public void categoryNOTCHAGES () throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'БЕЗ ИЗМЕНЕНИЙ' WHERE defference = 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
+    public void categoryNOTCHAGESUSD() throws SQLException{
+        Connection con = getDbConnection();
+        String query = "UPDATE consolid SET category = 'БЕЗ ИЗМЕНЕНИЙ' WHERE defference = 0";
+        Statement setsom = con.createStatement();
+        setsom.executeUpdate(query);
+    }
 
 }

@@ -6,7 +6,6 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.net.URL;
@@ -29,6 +28,15 @@ public class Total {
     TreeTableColumn<ExpencesUSD, String> treeTableColumn4 = new TreeTableColumn<>("USD");
     TreeTableColumn<ExpencesUSD, BigDecimal> treeTableColumn5 = new TreeTableColumn<>("Итог USD");
 
+
+    TreeTableColumn<TotalGlobalClass, String> treeTableColumn7 = new TreeTableColumn<>("Информация");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn8 = new TreeTableColumn<>("Сальдо вход");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn9 = new TreeTableColumn<>("Сальдо выход");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn10 = new TreeTableColumn<>("Разница");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn11 = new TreeTableColumn<>("Сальдо вход USD");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn12 = new TreeTableColumn<>("Сальдо выход USD");
+    TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn13 = new TreeTableColumn<>("Разница USD");
+
     Map<String, Map<Expences, List<Expences>>> results;
     Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> resultsUSD;
     Map<String, Map<TotalGlobalClass, List<TotalGlobalClass>>> TotalInf;
@@ -36,9 +44,10 @@ public class Total {
 
 
     @FXML
-    void initialize() throws IOException {
+    void initialize() {
     HashMapIn();
     HashMapInUsd();
+    TotalTableFill();
 
 //        try (Writer writer = new FileWriter("Output.json")) {
 //            Gson gson = new GsonBuilder().create();
@@ -50,6 +59,24 @@ public class Total {
 
     treeTableColumn4.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
     treeTableColumn5.setCellValueFactory(new TreeItemPropertyValueFactory<>("totalUsd"));
+
+    treeTableColumn7.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
+    treeTableColumn8.setCellValueFactory(new TreeItemPropertyValueFactory<>("saldo_in_som"));
+    treeTableColumn9.setCellValueFactory(new TreeItemPropertyValueFactory<>("saldo_out_som"));
+    treeTableColumn10.setCellValueFactory(new TreeItemPropertyValueFactory<>("differenceSom"));
+    treeTableColumn11.setCellValueFactory(new TreeItemPropertyValueFactory<>("saldo_in_usd"));
+    treeTableColumn12.setCellValueFactory(new TreeItemPropertyValueFactory<>("saldo_out_usd"));
+    treeTableColumn13.setCellValueFactory(new TreeItemPropertyValueFactory<>("differenceUsd"));
+
+
+    TotalGlobalView.getColumns().add(treeTableColumn7);
+    TotalGlobalView.getColumns().add(treeTableColumn8);
+    TotalGlobalView.getColumns().add(treeTableColumn9);
+    TotalGlobalView.getColumns().add(treeTableColumn10);
+    TotalGlobalView.getColumns().add(treeTableColumn11);
+    TotalGlobalView.getColumns().add(treeTableColumn12);
+    TotalGlobalView.getColumns().add(treeTableColumn13);
+
 
     expences_usd.getColumns().add(treeTableColumn4);
     expences_usd.getColumns().add(treeTableColumn5);
@@ -154,6 +181,11 @@ public class Total {
         TotalInf = new HashMap<>();
         MathContext mc = new MathContext(10);
         BigDecimal totalAmount = BigDecimal.ZERO;
+        BigDecimal totalAmount2 = BigDecimal.ZERO;
+        BigDecimal totalAmount3= BigDecimal.ZERO;
+        BigDecimal totalAmount4 = BigDecimal.ZERO;
+        BigDecimal totalAmount5 = BigDecimal.ZERO;
+        BigDecimal totalAmount6 = BigDecimal.ZERO;
         try {
             Connection totalView = DatabaseHandler.getDbConnection();
             PreparedStatement Map = totalView.prepareStatement(informationFromBD);
@@ -164,26 +196,41 @@ public class Total {
                 BigDecimal saldo_in_som = new BigDecimal(rs.getString(3));
                 BigDecimal saldo_out_som = new BigDecimal(rs.getString(4));
                 BigDecimal difference = new BigDecimal(rs.getString(5));
-                BigDecimal sald_in_usd = new BigDecimal(rs.getString(6));
+                BigDecimal saldo_in_usd = new BigDecimal(rs.getString(6));
                 BigDecimal saldo_out_usd = new BigDecimal(rs.getString(7));
                 BigDecimal difference_usd = new BigDecimal(rs.getString(8));
+
+                totalAmount = totalAmount.add(saldo_in_som, mc);
+                totalAmount2 = totalAmount2.add(saldo_out_som, mc);
+                totalAmount3 = totalAmount3.add(difference,mc);
+                totalAmount4 = totalAmount4.add(saldo_in_usd, mc);
+                totalAmount5 = totalAmount5.add(saldo_out_usd, mc);
+                totalAmount6 = totalAmount6.add(difference_usd, mc);
+
                 if (TotalInf.containsKey(category)){
                     Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = TotalInf.get(category);
                     innerMap.entrySet().iterator().next().getValue().add(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
-                            sald_in_usd, saldo_out_usd, difference_usd));
+                            saldo_in_usd, saldo_out_usd, difference_usd));
                 }else{
                     Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = new HashMap<>();
-                    innerMap.put(new TotalGlobalClass(category, name_score, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
+                    innerMap.put(new TotalGlobalClass(category, category, BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO,
                             BigDecimal.ZERO, BigDecimal.ZERO, BigDecimal.ZERO), new ArrayList<>());
                     innerMap.entrySet().iterator().next().getValue().add(new TotalGlobalClass(category, name_score, saldo_in_som, saldo_out_som, difference,
-                            sald_in_usd, saldo_out_usd, difference_usd));
+                            saldo_in_usd, saldo_out_usd, difference_usd));
                     TotalInf.put(category, innerMap);
                 }
+                Map.Entry<TotalGlobalClass, List<TotalGlobalClass>> innerMap = TotalInf.get(category).entrySet().iterator().next();
+                innerMap.getKey().setSaldo_in_som(innerMap.getKey().getSaldo_in_som().add(saldo_in_som));
+                innerMap.getKey().setSaldo_out_som(innerMap.getKey().getSaldo_out_som().add(saldo_out_som));
+                innerMap.getKey().setDifferenceSom(innerMap.getKey().getDifferenceSom().add(difference));
+                innerMap.getKey().setSaldo_in_usd(innerMap.getKey().getSaldo_in_usd().add(saldo_in_usd));
+                innerMap.getKey().setSaldo_out_usd(innerMap.getKey().getSaldo_out_usd().add(saldo_out_usd));
+                innerMap.getKey().setDifferenceUsd(innerMap.getKey().getDifferenceSom().add(difference));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        TreeItem<TotalGlobalClass> rootItem = new TreeItem(new TotalGlobalClass());
+        TreeItem<TotalGlobalClass> rootItem = new TreeItem(new TotalGlobalClass("", "Итог", totalAmount, totalAmount2, totalAmount3, totalAmount4, totalAmount5, totalAmount6));
         TotalInf.entrySet().forEach(entry -> {
             Map<TotalGlobalClass, List<TotalGlobalClass>> innerMap = entry.getValue();
             TreeItem<TotalGlobalClass> categoryItem;
