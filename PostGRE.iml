@@ -12,5 +12,6 @@
     <orderEntry type="library" name="poi-3" level="project" />
     <orderEntry type="library" name="lib1" level="project" />
     <orderEntry type="library" name="commons-collections4-4" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.5" level="project" />
   </component>
 </module>

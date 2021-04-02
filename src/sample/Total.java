@@ -1,5 +1,6 @@
 package sample;
 
+import com.google.gson.Gson;
 import javafx.fxml.FXML;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -32,11 +33,19 @@ public class Total {
     Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> resultsUSD;
     Map<String, Map<TotalGlobalClass, List<TotalGlobalClass>>> TotalInf;
     BigDecimal amount = BigDecimal.ZERO;
+    Gson gson = new Gson();
+
 
     @FXML
     void initialize() {
     HashMapIn();
     HashMapInUsd();
+
+
+    String json = gson.toJson(results);
+    JSONObject Json = new JSONObject ();
+    Json.putAll(json);
+
 
     treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
     treeTableColumn3.setCellValueFactory(new TreeItemPropertyValueFactory<>("total"));

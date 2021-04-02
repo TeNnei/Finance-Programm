@@ -314,10 +314,8 @@ public class Consolidated {
         dateSet.consolidinfDate(a);
         dateSet.consolidinfDateCredit(a);
         dateSet.consolidinfDateSaldoInSom(a);
-        dateSet.consolidinfDateSaldoOutSom(a);
         dateSet.consolidinfDateSaldoInUsd(a);
         dateSet.consolidinfDateDebitUsd(a);
         dateSet.consolidinfDateCreditUsd(a);
-        dateSet.consolidinfDateSaldoOutUsd(a);
     }
 }
