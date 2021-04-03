@@ -1,41 +1,56 @@
-{"БЕЗ ИЗМЕНЕНИЙ":
 {
-  "sample.Expences@1008fd6e":
-[{
-  "category":"БЕЗ ИЗМЕНЕНИЙ",
-  "name_of_score":"Машина",
-  "total":0,
-  "entries":[]},
-
-  {"category":"БЕЗ ИЗМЕНЕНИЙ",
-    "name_of_score":"Заявления",
-    "total":0,
-    "entries":[]}]},
-
-  "ПРИТОКИ":
-  {
-    "sample.Expences@2b0c31e6":
-  [{
-    "category":"ПРИТОКИ",
-    "name_of_score":"Зарплаты ",
-    "total":50,
-    "entries":[]
-  }]
+  "БЕЗ ИЗМЕНЕНИЙ": {
+    "sample.Expences@62c93cc9": [
+      {
+        "category": "БЕЗ ИЗМЕНЕНИЙ",
+        "name_of_score": "Проверочный",
+        "total": 0,
+        "entries": []
+      },
+      {
+        "category": "БЕЗ ИЗМЕНЕНИЙ",
+        "name_of_score": "Владик",
+        "total": 0,
+        "entries": []
+      }
+    ]
   },
-
-  "ОТТОКИ":
-  {"sample.Expences@7da0212":
-  [{
-    "category":"ОТТОКИ",
-    "name_of_score":"Продажи",
-    "total":-40,
-    "entries":[]
+  "ПРИТОКИ": {
+    "sample.Expences@749c4ba9": [
+      {
+        "category": "ПРИТОКИ",
+        "name_of_score": "Заявления",
+        "total": 10,
+        "entries": []
+      },
+      {
+        "category": "ПРИТОКИ",
+        "name_of_score": "Зарплаты ",
+        "total": 5,
+        "entries": []
+      },
+      {
+        "category": "ПРИТОКИ",
+        "name_of_score": "Продажи",
+        "total": 5,
+        "entries": []
+      }
+    ]
   },
-    {
-      "category":"ОТТОКИ",
-      "name_of_score":"Анализ",
-      "total":-10,
-      "entries":[]}
-  ]
+  "ОТТОКИ": {
+    "sample.Expences@33896308": [
+      {
+        "category": "ОТТОКИ",
+        "name_of_score": "Машина",
+        "total": -10,
+        "entries": []
+      },
+      {
+        "category": "ОТТОКИ",
+        "name_of_score": "Анализ",
+        "total": -10,
+        "entries": []
+      }
+    ]
   }
 }

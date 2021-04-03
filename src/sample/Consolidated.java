@@ -220,25 +220,25 @@ public class Consolidated {
                 Code.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, Integer>("code"));
 
                 Category.setCellValueFactory(new PropertyValueFactory<ConsolidInfin, String>("category"));
-                Category.setCellFactory(TextFieldTableCell.forTableColumn());
-                Category.setOnEditCommit(
-                        new EventHandler<TableColumn.CellEditEvent<ConsolidInfin, String>>() {
-                            @Override
-                            public void handle(TableColumn.CellEditEvent<ConsolidInfin, String> consolidInfinStringCellEditEvent) {
-                                DatabaseHandler db = new DatabaseHandler();
-                                // вот это шляпа считывает данные из редактируемой ячейки
-                                (consolidInfinStringCellEditEvent.getTableView().getItems().get
-                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow()))
-                                        .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
-                                String a = String.valueOf(consolidInfinStringCellEditEvent.getNewValue());
-                                ConsolidInfin c  = new ConsolidInfin(a);
-                                c.setCode(String.valueOf(Integer.parseInt((consolidInfinStringCellEditEvent.getTableView().getItems().get
-                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode())));
-                                db.consolidUpdateCategory(c);
-                                buildTable ();
-                            }
-                        }
-                );
+//                Category.setCellFactory(TextFieldTableCell.forTableColumn());
+//                Category.setOnEditCommit(
+//                        new EventHandler<TableColumn.CellEditEvent<ConsolidInfin, String>>() {
+//                            @Override
+//                            public void handle(TableColumn.CellEditEvent<ConsolidInfin, String> consolidInfinStringCellEditEvent) {
+//                                DatabaseHandler db = new DatabaseHandler();
+//                                // вот это шляпа считывает данные из редактируемой ячейки
+//                                (consolidInfinStringCellEditEvent.getTableView().getItems().get
+//                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow()))
+//                                        .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
+//                                String a = String.valueOf(consolidInfinStringCellEditEvent.getNewValue());
+//                                ConsolidInfin c  = new ConsolidInfin(a);
+//                                c.setCode(String.valueOf(Integer.parseInt((consolidInfinStringCellEditEvent.getTableView().getItems().get
+//                                        (consolidInfinStringCellEditEvent.getTablePosition().getRow())).getCode())));
+//                                db.consolidUpdateCategory(c);
+//                                buildTable ();
+//                            }
+//                        }
+//                );
 
                 Additional_Score.setCellValueFactory( new PropertyValueFactory<ConsolidInfin, String>("adittional_score"));
                 Additional_Score.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -247,7 +247,6 @@ public class Consolidated {
                             @Override
                             public void handle(TableColumn.CellEditEvent<ConsolidInfin, String> consolidInfinStringCellEditEvent) {
                                 DatabaseHandler db = new DatabaseHandler();
-                                // вот это шляпа считывает данные из редактируемой ячейки
                                 (consolidInfinStringCellEditEvent.getTableView().getItems().get
                                         (consolidInfinStringCellEditEvent.getTablePosition().getRow()))
                                         .setName_of_score(consolidInfinStringCellEditEvent.getNewValue());
@@ -317,7 +316,7 @@ public class Consolidated {
         dateSet.consolidinfDateSaldoInUsd(a);
         dateSet.consolidinfDateDebitUsd(a);
         dateSet.consolidinfDateCreditUsd(a);
-        dateSet.categorySETOUTSOM();
+        dateSet.categorySETInSOM();;
         dateSet.categorySETOUTSOM();
         dateSet.categorySETInUSD();
         dateSet.categorySETOUTUSD();

@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
@@ -22,12 +25,13 @@ public class Total {
     @FXML private TreeTableView<Expences> expences = new TreeTableView<Expences>();
     @FXML private TreeTableView<ExpencesUSD> expences_usd = new TreeTableView<ExpencesUSD>();
     @FXML private TreeTableView<TotalGlobalClass> TotalGlobalView = new TreeTableView<TotalGlobalClass>();
+    @FXML private ComboBox<String> filtrbox;
+
     TreeTableColumn<Expences, String> treeTableColumn2 = new TreeTableColumn<>("SOM");
     TreeTableColumn<Expences, BigDecimal> treeTableColumn3 = new TreeTableColumn<>("Итог");
 
     TreeTableColumn<ExpencesUSD, String> treeTableColumn4 = new TreeTableColumn<>("USD");
     TreeTableColumn<ExpencesUSD, BigDecimal> treeTableColumn5 = new TreeTableColumn<>("Итог USD");
-
 
     TreeTableColumn<TotalGlobalClass, String> treeTableColumn7 = new TreeTableColumn<>("Информация");
     TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn8 = new TreeTableColumn<>("Сальдо вход");
@@ -42,16 +46,18 @@ public class Total {
     Map<String, Map<TotalGlobalClass, List<TotalGlobalClass>>> TotalInf;
     BigDecimal amount = BigDecimal.ZERO;
 
-
     @FXML
     void initialize() {
     HashMapIn();
     HashMapInUsd();
     TotalTableFill();
+    boxFiltr ();
 
 //        try (Writer writer = new FileWriter("Output.json")) {
-//            Gson gson = new GsonBuilder().create();
+//            Gson gson = new GsonBuilder().setPrettyPrinting().create();
 //            gson.toJson(results, writer);
+//        } catch (IOException e) {
+//            e.printStackTrace();
 //        }
 
     treeTableColumn2.setCellValueFactory(new TreeItemPropertyValueFactory<>("name_of_score"));
@@ -132,7 +138,7 @@ public class Total {
     }
 
     public void HashMapInUsd(){
-        String MapInf = "SELECT category, name_score, difference_usd FROM consolid";
+        String MapInf = "SELECT category, additional_score, name_score, difference_usd FROM consolid";
          resultsUSD = new HashMap<>();
         MathContext mc = new MathContext(10);
         BigDecimal amount = BigDecimal.ZERO;
@@ -142,18 +148,18 @@ public class Total {
             ResultSet rs = FirstMap.executeQuery();
             while (rs.next()) {
                 String category = rs.getString(1);
-                String name_score = rs.getString(2);
-                String differenceUsd = rs.getString(3);
+                String additional_score = rs.getString(2);
+                String name_score = rs.getString(3);
+                String differenceUsd = rs.getString(4);
                 BigDecimal total = new BigDecimal(differenceUsd);
                 amount = amount.add(total, mc);
-
-                if (resultsUSD.containsKey(category)) {
+                if (resultsUSD.containsKey(category) && resultsUSD.containsKey(additional_score)) {
                     Map<ExpencesUSD, List<ExpencesUSD>> innerMap = resultsUSD.get(category);
-                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, name_score, total));
+                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, additional_score, name_score, total));
                 } else {
                     Map<ExpencesUSD, List<ExpencesUSD>> innerMap = new HashMap<>();
-                    innerMap.put(new ExpencesUSD(category, category, BigDecimal.ZERO), new ArrayList<>());
-                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, name_score, total));
+                    innerMap.put(new ExpencesUSD(category, category, additional_score, BigDecimal.ZERO), new ArrayList<>());
+                    innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, additional_score, name_score, total));
                     resultsUSD.put(category, innerMap);
                 }
                 Map.Entry<ExpencesUSD, List<ExpencesUSD>> innerMap = resultsUSD.get(category).entrySet().iterator().next();
@@ -167,10 +173,17 @@ public class Total {
             Map<ExpencesUSD, List<ExpencesUSD>> innerMap = entry.getValue();
             TreeItem<ExpencesUSD> categoryItem;
             categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
+
             rootItem.getChildren().add(categoryItem);
+
             innerMap.entrySet().iterator().next().getValue().forEach(expenceInList -> {
-                TreeItem<ExpencesUSD> scoreItem = new TreeItem(expenceInList);
+                TreeItem<ExpencesUSD> scoreItem = new TreeItem(innerMap.entrySet().iterator().next().getKey().getAdditional_score());
                 categoryItem.getChildren().add(scoreItem);
+
+                innerMap.entrySet().iterator().next().getValue().forEach(second -> {
+                    TreeItem<ExpencesUSD> secondItems2 = new TreeItem(second);
+                    scoreItem.getChildren().add(secondItems2);
+                });
             });
         });
         expences_usd.setRoot(rootItem);
@@ -242,5 +255,25 @@ public class Total {
             });
         });
         TotalGlobalView.setRoot(rootItem);
+    }
+
+    public ObservableList<String> boxFiltr (){
+        ObservableList<String> dataIn;
+        Connection con;
+        ResultSet rs;
+        con = DatabaseHandler.getDbConnection();
+        dataIn = FXCollections.observableArrayList();
+        String comboBoxIn = "SELECT additional_score FROM consolid";
+
+            try {
+                rs = con.createStatement().executeQuery(comboBoxIn);
+                while (rs.next()){
+                 dataIn.add(rs.getString(1));
+                }
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+    }
+            filtrbox.setItems(dataIn);
+            return dataIn;
     }
 }

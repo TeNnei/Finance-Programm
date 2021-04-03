@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TreeTableView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,5 +35,6 @@
       <Button fx:id="excelFirst" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="ExcelSom" GridPane.rowIndex="1" />
       <Button fx:id="excelCesond" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="ExcelUsd" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="excelTotal" maxHeight="1.7976931348623157E308" mnemonicParsing="false" text="ExcelTotal" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <ComboBox fx:id="filtrbox" maxHeight="1.7976931348623157E308" prefWidth="150.0" promptText="Выбирете фильтр" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
    </children>
 </GridPane>
