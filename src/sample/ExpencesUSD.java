@@ -1,11 +1,6 @@
 package sample;
 
-import javafx.scene.control.TreeItem;
-
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class ExpencesUSD{
@@ -13,28 +8,13 @@ public class ExpencesUSD{
     private String additional_score;
     private String name_of_score;
     private BigDecimal totalUsd;
+    public Map<String, ExpencesUSD> child;
 
 
+    public ExpencesUSD(String name_of_score, ExpencesUSD totalUsd) {
+        this.name_of_score = name_of_score;
 
-    public Map addThirdTree ()
-    {
-        List<ExpencesUSD> forThird = new ArrayList<>();
-        forThird.add(new ExpencesUSD(getAdditional_score()));
-
-        TreeItem<ExpencesUSD> items = new TreeItem(new ExpencesUSD(additional_score));
-        items.getChildren().add((TreeItem<ExpencesUSD>) forThird);
-
-        Map<String, TreeItem<ExpencesUSD>> thirdLevel = new HashMap();
-        {
-            thirdLevel.put(category, items);
-        }
-        return thirdLevel;
-    }
-
-
-    public ExpencesUSD(String category, String additional_score) {
-        this.category = category;
-        this.additional_score = additional_score;
+        child.put(name_of_score, totalUsd);
     }
 
     public ExpencesUSD(String category, String name_of_score, BigDecimal differenceUsd) {

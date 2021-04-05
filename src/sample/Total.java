@@ -271,6 +271,7 @@ public class Total {
         con = DatabaseHandler.getDbConnection();
         dataIn = FXCollections.observableArrayList();
         String comboBoxIn = "SELECT category FROM consolid";
+
             try {
                 rs = con.createStatement().executeQuery(comboBoxIn);
                 while (rs.next()){
@@ -292,7 +293,6 @@ public class Total {
             Connection Map = DatabaseHandler.getDbConnection();
             PreparedStatement FirstMap = Map.prepareStatement(MapInf);
             FirstMap.setString(1, filtr);
-
             ResultSet rs = FirstMap.executeQuery();
             while (rs.next()) {
                 String category = rs.getString(1);
