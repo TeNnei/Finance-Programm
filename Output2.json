@@ -1,0 +1,56 @@
+{
+  "БЕЗ ИЗМЕНЕНИЙ": {
+    "sample.ExpencesUSD@6e5c5f20": [
+      {
+        "category": "БЕЗ ИЗМЕНЕНИЙ",
+        "additional_score": "Проверочный",
+        "name_of_score": "Контрагент",
+        "totalUsd": 0
+      },
+      {
+        "category": "БЕЗ ИЗМЕНЕНИЙ",
+        "additional_score": "Владик",
+        "name_of_score": "Должник",
+        "totalUsd": 0
+      }
+    ]
+  },
+  "ПРИТОКИ": {
+    "sample.ExpencesUSD@76efabcf": [
+      {
+        "category": "ПРИТОКИ",
+        "additional_score": "Продажи",
+        "name_of_score": "Расход",
+        "totalUsd": 5
+      },
+      {
+        "category": "ПРИТОКИ",
+        "additional_score": "Заявления",
+        "name_of_score": "Должник",
+        "totalUsd": 10
+      },
+      {
+        "category": "ПРИТОКИ",
+        "additional_score": "Зарплаты ",
+        "name_of_score": "Расход",
+        "totalUsd": 5
+      }
+    ]
+  },
+  "ОТТОКИ": {
+    "sample.ExpencesUSD@42661241": [
+      {
+        "category": "ОТТОКИ",
+        "additional_score": "Анализ",
+        "name_of_score": "Должник",
+        "totalUsd": -10
+      },
+      {
+        "category": "ОТТОКИ",
+        "additional_score": "Машина",
+        "name_of_score": "Контрагент",
+        "totalUsd": -10
+      }
+    ]
+  }
+}

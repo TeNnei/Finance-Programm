@@ -1,6 +1,6 @@
 {
   "БЕЗ ИЗМЕНЕНИЙ": {
-    "sample.Expences@62c93cc9": [
+    "sample.Expences@36d5c218": [
       {
         "category": "БЕЗ ИЗМЕНЕНИЙ",
         "name_of_score": "Проверочный",
@@ -16,7 +16,13 @@
     ]
   },
   "ПРИТОКИ": {
-    "sample.Expences@749c4ba9": [
+    "sample.Expences@1e640f56": [
+      {
+        "category": "ПРИТОКИ",
+        "name_of_score": "Продажи",
+        "total": 5,
+        "entries": []
+      },
       {
         "category": "ПРИТОКИ",
         "name_of_score": "Заявления",
@@ -28,26 +34,20 @@
         "name_of_score": "Зарплаты ",
         "total": 5,
         "entries": []
-      },
-      {
-        "category": "ПРИТОКИ",
-        "name_of_score": "Продажи",
-        "total": 5,
-        "entries": []
       }
     ]
   },
   "ОТТОКИ": {
-    "sample.Expences@33896308": [
+    "sample.Expences@34901256": [
       {
         "category": "ОТТОКИ",
-        "name_of_score": "Машина",
+        "name_of_score": "Анализ",
         "total": -10,
         "entries": []
       },
       {
         "category": "ОТТОКИ",
-        "name_of_score": "Анализ",
+        "name_of_score": "Машина",
         "total": -10,
         "entries": []
       }

@@ -42,20 +42,25 @@ public class Total {
     TreeTableColumn<TotalGlobalClass, BigDecimal> treeTableColumn13 = new TreeTableColumn<>("Разница USD");
 
     Map<String, Map<Expences, List<Expences>>> results;
-    Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> resultsUSD;
+
     Map<String, Map<TotalGlobalClass, List<TotalGlobalClass>>> TotalInf;
     BigDecimal amount = BigDecimal.ZERO;
 
     @FXML
     void initialize() {
-    HashMapIn();
+
+        filtrbox.setOnAction(actionEvent -> {
+            HashMapInFiltr();
+        });
+
+        HashMapIn();
     HashMapInUsd();
     TotalTableFill();
     boxFiltr ();
 
-//        try (Writer writer = new FileWriter("Output.json")) {
+//        try (Writer writer = new FileWriter("Output2.json")) {
 //            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-//            gson.toJson(results, writer);
+//            gson.toJson(resultsUSD, writer);
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
@@ -139,7 +144,8 @@ public class Total {
 
     public void HashMapInUsd(){
         String MapInf = "SELECT category, additional_score, name_score, difference_usd FROM consolid";
-         resultsUSD = new HashMap<>();
+        Map<String, Map<ExpencesUSD, List<ExpencesUSD>>> resultsUSD;
+        resultsUSD = new HashMap<>();
         MathContext mc = new MathContext(10);
         BigDecimal amount = BigDecimal.ZERO;
         try {
@@ -153,16 +159,18 @@ public class Total {
                 String differenceUsd = rs.getString(4);
                 BigDecimal total = new BigDecimal(differenceUsd);
                 amount = amount.add(total, mc);
-                if (resultsUSD.containsKey(category) && resultsUSD.containsKey(additional_score)) {
+
+                if (resultsUSD.containsKey(category)) {
                     Map<ExpencesUSD, List<ExpencesUSD>> innerMap = resultsUSD.get(category);
                     innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, additional_score, name_score, total));
-                } else {
+                } else
+                    {
                     Map<ExpencesUSD, List<ExpencesUSD>> innerMap = new HashMap<>();
                     innerMap.put(new ExpencesUSD(category, category, additional_score, BigDecimal.ZERO), new ArrayList<>());
                     innerMap.entrySet().iterator().next().getValue().add(new ExpencesUSD(category, additional_score, name_score, total));
                     resultsUSD.put(category, innerMap);
                 }
-                Map.Entry<ExpencesUSD, List<ExpencesUSD>> innerMap = resultsUSD.get(category).entrySet().iterator().next();
+                Map.Entry<ExpencesUSD,List<ExpencesUSD>> innerMap = resultsUSD.get(category).entrySet().iterator().next();
                 innerMap.getKey().setTotalUsd(innerMap.getKey().getTotalUsd().add(total));
             }
         }catch (SQLException throwables) {
@@ -173,11 +181,10 @@ public class Total {
             Map<ExpencesUSD, List<ExpencesUSD>> innerMap = entry.getValue();
             TreeItem<ExpencesUSD> categoryItem;
             categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
-
             rootItem.getChildren().add(categoryItem);
 
             innerMap.entrySet().iterator().next().getValue().forEach(expenceInList -> {
-                TreeItem<ExpencesUSD> scoreItem = new TreeItem(innerMap.entrySet().iterator().next().getKey().getAdditional_score());
+                TreeItem<ExpencesUSD> scoreItem = new TreeItem(expenceInList);
                 categoryItem.getChildren().add(scoreItem);
 
                 innerMap.entrySet().iterator().next().getValue().forEach(second -> {
@@ -263,8 +270,7 @@ public class Total {
         ResultSet rs;
         con = DatabaseHandler.getDbConnection();
         dataIn = FXCollections.observableArrayList();
-        String comboBoxIn = "SELECT additional_score FROM consolid";
-
+        String comboBoxIn = "SELECT category FROM consolid";
             try {
                 rs = con.createStatement().executeQuery(comboBoxIn);
                 while (rs.next()){
@@ -276,4 +282,53 @@ public class Total {
             filtrbox.setItems(dataIn);
             return dataIn;
     }
+
+    public void HashMapInFiltr(){
+        String MapInf = "SELECT category, name_score, defference FROM consolid WHERE category = ?";
+        results = new HashMap<>();
+        MathContext mc = new MathContext(10);
+        String filtr = filtrbox.getValue();
+        try {
+            Connection Map = DatabaseHandler.getDbConnection();
+            PreparedStatement FirstMap = Map.prepareStatement(MapInf);
+            FirstMap.setString(1, filtr);
+
+            ResultSet rs = FirstMap.executeQuery();
+            while (rs.next()) {
+                String category = rs.getString(1);
+                String name_score = rs.getString(2);
+                BigDecimal difference = new BigDecimal(rs.getString(3));
+
+                amount = amount.add(difference, mc);
+
+                if (results.containsKey(category)) {
+                    Map<Expences, List<Expences>> innerMap = results.get(category);
+                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, difference));
+                }
+                else {
+                    Map<Expences, List<Expences>> innerMap = new HashMap<>();
+                    innerMap.put(new Expences(category, category, BigDecimal.ZERO), new ArrayList<>());
+                    innerMap.entrySet().iterator().next().getValue().add(new Expences(category, name_score, difference));
+                    results.put(category, innerMap);
+                }
+                Map.Entry<Expences, List<Expences>> innerMap = results.get(category).entrySet().iterator().next();
+                innerMap.getKey().setTotal(innerMap.getKey().getTotal().add(difference));
+            }
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        TreeItem<Expences> rootItem = new TreeItem(new Expences(" ", "Данные", amount));
+        results.entrySet().forEach(entry -> {
+            Map<Expences, List<Expences>> innerMap = entry.getValue();
+            TreeItem<Expences> categoryItem;
+            categoryItem = new TreeItem(innerMap.entrySet().iterator().next().getKey());
+            rootItem.getChildren().add(categoryItem);
+            innerMap.entrySet().iterator().next().getValue().forEach(expenceInList -> {
+                TreeItem<Expences> scoreItem = new TreeItem(expenceInList);
+                categoryItem.getChildren().add(scoreItem);
+            });
+        });
+        expences.setRoot(rootItem);
+    }
+
 }
