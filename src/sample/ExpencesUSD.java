@@ -32,8 +32,10 @@ public class ExpencesUSD{
         this.totalUsd = differenceUsd;
     }
 
-    public ExpencesUSD(String category) {
-      this.category = category;
+    public ExpencesUSD(String value) {
+      this.category = value;
+      this.additional_score = value;
+      this.name_of_score = value;
     }
 
     public String getCategory() {
@@ -52,7 +54,7 @@ public class ExpencesUSD{
         this.name_of_score = name_of_score;
     }
 
-    public ExpencesUSD(String category, String name_of_score, String additional_score , BigDecimal totalUsd) {
+    public ExpencesUSD(String category, String additional_score, String name_of_score, BigDecimal totalUsd) {
         this.category = category;
         this.additional_score = additional_score;
         this.name_of_score = name_of_score;
