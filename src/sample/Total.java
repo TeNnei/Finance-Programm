@@ -48,6 +48,8 @@ public class Total {
 
     @FXML
     void initialize() {
+        Node begin = new Node();
+        begin.arrayIn();
 
         filtrbox.setOnAction(actionEvent -> {
             HashMapInFiltr();

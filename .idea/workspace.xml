@@ -10,9 +10,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sample/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/ExpencesUSD.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/ExpencesUSD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PostGRE/sample/Total.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/ExpencesUSD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ExpencesUSD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Total.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Total.java" afterDir="false" />
     </list>
@@ -439,12 +439,16 @@
           <line>205</line>
           <option name="timeStamp" value="179" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sample/Node.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="194" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="java.lang.String" memberName="hash" />
-        <PinnedItemInfo parentTag="sample.ExpencesUSD" memberName="additional_score" />
         <PinnedItemInfo parentTag="javafx.scene.control.TableColumn" memberName="tableView" />
         <PinnedItemInfo parentTag="java.math.MathContext" memberName="roundingMode" />
         <PinnedItemInfo parentTag="java.lang.String" memberName="coder" />
@@ -462,7 +466,7 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Finance_Programm$Main.ic" NAME="Main Coverage Results" MODIFIED="1616133884194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Finance_Programm$Main.ic" NAME="Main Coverage Results" MODIFIED="1617705418549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>sample.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/PostGRE$Main.ic" NAME="Main Coverage Results" MODIFIED="1615371899187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

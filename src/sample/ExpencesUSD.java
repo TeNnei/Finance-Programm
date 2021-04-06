@@ -4,17 +4,27 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class ExpencesUSD{
+    private String treeLevel;
     private String category;
     private String additional_score;
     private String name_of_score;
     private BigDecimal totalUsd;
     public Map<String, ExpencesUSD> child;
 
-
-    public ExpencesUSD(String name_of_score, ExpencesUSD totalUsd) {
+    public ExpencesUSD(String name_of_score, BigDecimal totalUsd) {
         this.name_of_score = name_of_score;
+        this.totalUsd = totalUsd;
+    }
 
-        child.put(name_of_score, totalUsd);
+    public ExpencesUSD(String additional_score, String name_of_score) {
+        this.additional_score = additional_score;
+        this.name_of_score = name_of_score;
+    }
+
+    public ExpencesUSD(String category, String additional_score, String name_of_score) {
+        this.category = category;
+        this.additional_score = additional_score;
+        this.name_of_score = name_of_score;
     }
 
     public ExpencesUSD(String category, String name_of_score, BigDecimal differenceUsd) {
@@ -23,10 +33,9 @@ public class ExpencesUSD{
         this.totalUsd = differenceUsd;
     }
 
-    public ExpencesUSD(String additional_score) {
-        this.additional_score = additional_score;
+    public ExpencesUSD(String score) {
+      this.name_of_score = score;
     }
-
 
     public String getCategory() {
         return category;
@@ -49,7 +58,6 @@ public class ExpencesUSD{
         this.additional_score = additional_score;
         this.name_of_score = name_of_score;
         this.totalUsd = totalUsd;
-
     }
 
     public BigDecimal getTotalUsd() {
