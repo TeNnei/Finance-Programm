@@ -24,20 +24,23 @@ class Node {
                 String additional_scoreDB = rs.getString(2);
                 String scoreDb = rs.getString(3);
                 BigDecimal difference = new BigDecimal(rs.getString(4));
-//                ExpencesUSD treeFill = new ExpencesUSD(categoryDb, additional_scoreDB, scoreDb, difference);
+                ExpencesUSD treeFill = new ExpencesUSD(categoryDb, additional_scoreDB, scoreDb, difference);
 
                 boolean isTrue = category.stream().anyMatch(u -> u.getCategory().equals(categoryDb));
-                if (isTrue){
-
+                if (!isTrue){
+                    category.add(new ExpencesUSD(treeFill.getCategory()));
+                    additional_score.add(new ExpencesUSD(treeFill.getAdditional_score()));
+                    score.add(new ExpencesUSD(treeFill.getName_of_score()));
+                }else
+                    {
+                        boolean isTrueadditionalScore = additional_score.stream().anyMatch(u -> u.getCategory().equals(additional_scoreDB));
+                        if (!isTrueadditionalScore){
+                            additional_score.add(new ExpencesUSD(treeFill.getAdditional_score()));
+                            score.add(new ExpencesUSD(treeFill.getName_of_score()));
+                        }else {
+                            score.add(new ExpencesUSD(treeFill.getName_of_score()));
+                        }
                 }
-                else{
-
-                }
-                category.add(new ExpencesUSD(categoryDb, additional_scoreDB));
-
-                additional_score.add(new ExpencesUSD(scoreDb));
-
-                score.add(new ExpencesUSD(scoreDb, difference));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -46,5 +49,4 @@ class Node {
             additional_score.get(1);
         }
     }
-
 }
