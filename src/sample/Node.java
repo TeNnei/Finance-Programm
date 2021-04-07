@@ -11,6 +11,7 @@ class Node {
     ArrayList <ExpencesUSD> category = new ArrayList<>();
     ArrayList<ExpencesUSD> additional_score = new ArrayList<>();
     ArrayList<ExpencesUSD> score = new ArrayList<>();
+    ArrayList<ExpencesUSD> treeInf = new ArrayList<>();
 
     public void arrayIn (){
         String arrayIn = "SELECT category, additional_score, name_score, defference FROM consolid";
@@ -26,6 +27,7 @@ class Node {
                 BigDecimal difference = new BigDecimal(rs.getString(4));
                 ExpencesUSD treeFill = new ExpencesUSD(categoryDb, additional_scoreDB, scoreDb, difference);
 
+                treeInf.add(new ExpencesUSD(categoryDb, additional_scoreDB, scoreDb, difference));
                 boolean isTrue = category.stream().anyMatch(u -> u.getCategory().equals(categoryDb));
                 if (!isTrue){
                     category.add(new ExpencesUSD(treeFill.getCategory()));
@@ -45,8 +47,8 @@ class Node {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        for (int i = 0 ; i < additional_score.size(); i ++){
-            additional_score.get(1);
-        }
+            for (int i = 0 ; i < additional_score.size(); i ++) {
+                ExpencesUSD a = additional_score.get(i);
+            }
     }
 }

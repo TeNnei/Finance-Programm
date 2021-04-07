@@ -10,22 +10,6 @@ public class ExpencesUSD{
     private BigDecimal totalUsd;
     public Map<String, ExpencesUSD> child;
 
-//    public ExpencesUSD(String name_of_score, BigDecimal totalUsd) {
-//        this.name_of_score = name_of_score;
-//        this.totalUsd = totalUsd;
-//    }
-//
-//    public ExpencesUSD(String additional_score, String name_of_score) {
-//        this.additional_score = additional_score;
-//        this.name_of_score = name_of_score;
-//    }
-//
-//    public ExpencesUSD(String category, String additional_score, String name_of_score) {
-//        this.category = category;
-//        this.additional_score = additional_score;
-//        this.name_of_score = name_of_score;
-//    }
-
     public ExpencesUSD(String category, String name_of_score, BigDecimal differenceUsd) {
         this.category = category;
         this.name_of_score = name_of_score;
